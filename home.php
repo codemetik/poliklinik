@@ -14,7 +14,7 @@
     <div class="timeline mt-2">
       <!-- timeline time label -->
       <div class="time-label">
-        <span class="bg-red">10 Feb. 2014</span>
+        <span class="bg-red">10 Feb. 2020</span>
       </div>
       <!-- /.timeline-label -->
       <!-- timeline item -->
@@ -25,10 +25,7 @@
           <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
 
           <div class="timeline-body">
-            Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-            weebly ning heekya handango imeem plugg dopplr jibjab, movity
-            jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-            quora plaxo ideeli hulu weebly balihoo...
+            text
           </div>
           <div class="timeline-footer">
             <a class="btn btn-primary btn-sm">Read more</a>
@@ -53,9 +50,7 @@
           <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
           <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
           <div class="timeline-body">
-            Take me to your leader!
-            Switzerland is small and neutral!
-            We are more like Germany, ambitious and misunderstood!
+            text
           </div>
           <div class="timeline-footer">
             <a class="btn btn-warning btn-sm">View comment</a>
@@ -65,7 +60,7 @@
       <!-- END timeline item -->
       <!-- timeline time label -->
       <div class="time-label">
-        <span class="bg-green">3 Jan. 2014</span>
+        <span class="bg-green">3 Jan. 2020</span>
       </div>
       <!-- /.timeline-label -->
       <!-- timeline item -->
@@ -95,7 +90,8 @@
 
           <div class="timeline-body">
             <div class="embed-responsive embed-responsive-16by9">
-              <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/tMWkeBIohBs" frameborder="0" allowfullscreen=""></iframe>
+              video
+              <!-- <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/tMWkeBIohBs" frameborder="0" allowfullscreen=""></iframe> -->
             </div>
           </div>
           <div class="timeline-footer">

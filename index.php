@@ -74,7 +74,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link text-white">
+            <a href="index.php" class="nav-link text-white">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -115,7 +115,24 @@
         
         <?php 
         if (isset($_SESSION['id_user'])) { ?>
-
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-item">
+              <a href="?page=dataku" class="nav-link text-white">
+                <i class="nav-icon fas fa-user"></i>
+                <p>
+                  My Data
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="?page=jadwal" class="nav-link text-white">
+                <i class="nav-icon fas fa-clipboard-list"></i>
+                <p>
+                  Jadwal
+                </p>
+              </a>
+            </li>
+          </ul>
           
         <?php }else{ ?>
           <hr class="bg-dark"> <!--buka pilihan-->
@@ -180,7 +197,13 @@
               <li class="breadcrumb-item"><a href="?page=home">Home</a></li>
               <li class="breadcrumb-item"><a href="?page=poliklinik">Poliklinik</a></li>
               <li class="breadcrumb-item"><a href="?page=jadwal_praktek">Jadwal Praktek</a></li>
-              <li class="breadcrumb-item"><a href="?page=pendaftaran">Pendaftaran</a></li>
+              <?php 
+              if (isset($_SESSION['id_user'])) {
+                
+              }else{ ?>
+                <li class="breadcrumb-item"><a href="?page=pendaftaran">Pendaftaran</a></li>
+              <?php }
+              ?>
               <li class="breadcrumb-item"><a href="?page=layanan">Layanan</a></li>
             </ol>
           </div><!-- /.col -->
@@ -206,14 +229,20 @@
             case 'jadwal_praktek':
               include "home/jadwal_praktek.php";
               break;
-            case 'Pendaftaran':
+            case 'pendaftaran':
               include "home/pendaftaran_pasien.php";
               break;
             case 'layanan':
               include "home/informasi_pelayanan.php";
               break;
+            case 'jadwal':
+              include "page/pasien/jadwal.php";
+              break;
             case 'contact_us':
               include "contact_us.php";
+              break;
+            case 'dataku':
+              include "page/pasien/dataku.php";
               break;
             
             default:

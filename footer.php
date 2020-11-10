@@ -11,7 +11,54 @@
 
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
+
 <script src="plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+        $('#myDokter').on('show.bs.modal', function (e) {
+            var rowid = $(e.relatedTarget).data('id');
+            //menggunakan fungsi ajax untuk pengambilan data
+            $.ajax({
+                type : 'post',
+                url : 'page/admin/users/detail_dokter.php',
+                data :  'rowid='+ rowid,
+                success : function(data){
+                $('.fetched-datadokter').html(data);//menampilkan data ke dalam modal
+                }
+            });
+         });
+    });
+
+    $(document).ready(function(){
+        $('#myAdmin').on('show.bs.modal', function (e) {
+            var rowid = $(e.relatedTarget).data('id');
+            //menggunakan fungsi ajax untuk pengambilan data
+            $.ajax({
+                type : 'post',
+                url : 'page/admin/users/detail_adminstaff.php',
+                data :  'rowid='+ rowid,
+                success : function(data){
+                $('.fetched-dataadmindanstaff').html(data);//menampilkan data ke dalam modal
+                }
+            });
+         });
+    });
+
+    $(document).ready(function(){
+        $('#myPasien').on('show.bs.modal', function (e) {
+            var rowid = $(e.relatedTarget).data('id');
+            //menggunakan fungsi ajax untuk pengambilan data
+            $.ajax({
+                type : 'post',
+                url : 'page/admin/users/detail_pasien.php',
+                data :  'rowid='+ rowid,
+                success : function(data){
+                $('.fetched-datapasien').html(data);//menampilkan data ke dalam modal
+                }
+            });
+         });
+    });
+</script>
 <!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- overlayScrollbars -->
@@ -33,5 +80,15 @@
 
 <!-- PAGE SCRIPTS -->
 <script src="dist/js/pages/dashboard2.js"></script>
+<script src="plugins/select2/js/select2.min.js"></script>
+<script>
+$(function () {
+    $('.select2').select2()
+
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+})
+</script>
 </body>
 </html>

@@ -22,40 +22,6 @@
     </form> -->
 
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a href="" class="nav-link">Poliklinik</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i> Jadwal Praktek
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">15 Notifications</span>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a href="" class="nav-link">Pendaftaran Pasien</a>
-      </li>
-      <li class="nav-item">
-        <a href="" class="nav-link">Informasi</a>
-      </li>
       <?php 
       if (isset($_SESSION['id_user'])) { ?>
         
@@ -108,84 +74,27 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link text-white">
+            <a href="staff.php" class="nav-link text-white">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
               </p>
             </a>
           </li>
-          
-          <!-- <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
+          <li class="nav-item">
+            <a href="staff.php?page=mystaff" class="nav-link text-white">
+              <i class="nav-icon fas fa-user"></i>
               <p>
-                Charts
-                <i class="right fas fa-angle-left"></i>
+                My Saff
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>ChartJS</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Flot</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/charts/inline.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inline</p>
-                </a>
-              </li>
-            </ul>
-          </li> -->
-        </ul>
-        <hr class="bg-dark">
-        <ul class="nav nav-pills nav-sidebar flex-column">
-          <li class="nav-item">
-            <a href="?page=contact_us" class="nav-link text-white">
-              
-                Register
-            </a>
           </li>
-        </ul>
-        <hr class="bg-dark">
-        <ul class="nav nav-pills nav-sidebar flex-column">
-          <li class="nav-item"><a href="" class="nav-link text-white">Login</a></li>
-          <form action="proses_login.php" method="POST">
-            <div class="input-group mb-2">
-              <input type="text" class="form-control" name="username" placeholder="Username" autofocus>
-              <div class="input-group-append">
-                <div class="input-group-text">
-                  <span class="fas fa-user"></span>
-                </div>
-              </div>
-            </div> 
-            <div class="input-group mb-2">
-              <input type="password" class="form-control" name="password" placeholder="Password">
-              <div class="input-group-append">
-                <div class="input-group-text">
-                  <span class="fas fa-lock"></span>
-                </div>
-              </div>
-            </div>  
-            <div class="">
-            <button type="submit" name="login" class="btn btn-primary btn-block"><i class="fa fa-sign-in-alt"></i> Login</button>
-          </div>
-          </form>
-        </ul>
-        <hr class="bg-dark">
-        <ul class="nav nav-pills nav-sidebar flex-column">
           <li class="nav-item">
-            <a href="?page=contact_us" class="nav-link text-white">
-              
-                Contact Us
+            <a href="staff.php?page=jadwal_praktek" class="nav-link text-white">
+              <i class="nav-icon fas fa-clipboard-list"></i>
+              <p>
+                Jadwal Praktek
+              </p>
             </a>
           </li>
         </ul>
@@ -206,8 +115,11 @@
         if (isset($_GET['page'])) {
           $page = $_GET['page'];
           switch ($page) {
-            case 'home':
-              include "home.php";
+            case 'mystaff':
+              include "page/staff/mystaff.php";
+              break;
+            case 'jadwal_praktek':
+              include "page/staff/jadwal_praktek.php";
               break;
             case 'contact_us':
               include "contact_us.php";

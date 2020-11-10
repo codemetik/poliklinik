@@ -29,6 +29,30 @@ if (isset($_POST['login'])) {
 			document.location.href = 'index.php';
 			</script>";
 
+		}else if($dtbg['id_bagian'] == 'BG003'){
+
+			$_SESSION['id_user'] = $dtbg['id_user'];
+			$_SESSION['username'] = $dtuser['username'];
+			$_SESSION['nama_bagian'] = $dtbg['nama_bagian'];
+
+
+			echo "<script>
+			alert('Anda berhasil login');
+			document.location.href = 'dokter.php';
+			</script>";
+
+		}else if($dtbg['id_bagian'] == 'BG002'){
+
+			$_SESSION['id_user'] = $dtbg['id_user'];
+			$_SESSION['username'] = $dtuser['username'];
+			$_SESSION['nama_bagian'] = $dtbg['nama_bagian'];
+
+
+			echo "<script>
+			alert('Anda berhasil login');
+			document.location.href = 'staff.php';
+			</script>";
+
 		}else{
 
 			$_SESSION['id_user'] = $dtbg['id_user'];

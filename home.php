@@ -10,7 +10,12 @@
     </div>
   </div><!-- /.col -->
   <div class="col-sm-6">
-  	<!-- The time line -->
+    <div class="card mt-2">
+      <div class="card-header bg-blue">
+        <h5>Antrian Pasien</h5>
+      </div>
+      <div class="card-body">
+        <!-- The time line -->
     <div class="timeline mt-2">
       <!-- timeline time label -->
       <div class="time-label">
@@ -102,6 +107,8 @@
       <!-- END timeline item -->
       <div>
         <i class="fas fa-clock bg-gray"></i>
+      </div>
+    </div>      
       </div>
     </div>
   </div>

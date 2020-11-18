@@ -6,13 +6,13 @@ $id_us = mysqli_fetch_array($sql);
 	<div class="col-sm-12">
 		<ol class="breadcrumb mt-2">
           <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active">My Data</li>
+          <li class="breadcrumb-item active">My Staff</li>
         </ol>
 	</div>
 </div>
 <div class="card">
-	<div class="card-header">
-		<h5>My Data</h5>
+	<div class="card-header bg-blue">
+		<h5>My Staff</h5>
 	</div>
 	<div class="card-body">
 	<form action="page/staff/proses/proses_edit_mystaff.php" method="POST">

@@ -6,6 +6,22 @@ $nous = (int) substr($us, 3, 4);
 $nous++; 
 $user = "USR";
 $id_user = $user . sprintf("%04s", $nous);
+
+
+
+$pasien = mysqli_query($koneksi, "SELECT max(no_antrian) AS maxCode, max(no_rekam_medis) AS maxrm FROM tb_pasien");
+$ps = mysqli_fetch_array($pasien);
+$p = $ps['maxCode'];
+$pe = $ps['maxrm'];
+$pas = (int) substr($p, 2, 4);
+$pasi = (int) substr($pe, 2, 4);
+$pas++; 
+$pasi++;
+date_default_timezone_set('Asia/Jakarta'); 
+$psi = "AN";
+$pi = "RM";
+$no_antrian = $psi . sprintf("%04s", $pas);
+$no_rm = $pi . sprintf("%04s", $pasi);
 ?>
 <div class="row mt-2">
 	<div class="col-sm-12">
@@ -16,7 +32,7 @@ $id_user = $user . sprintf("%04s", $nous);
 	</div>
 </div>
 <div class="card">
-	<div class="card-header">
+	<div class="card-header bg-blue">
 		<h5>Pendaftaran Pasien</h5>
 	</div>
 	<div class="card-body">
@@ -92,6 +108,24 @@ $id_user = $user . sprintf("%04s", $nous);
 				<div class="form-group">
 					<label>Tgl Daftar</label>
 					<input type="text" name="tgl_masuk" class="form-control" value="<?= $tgl_masuk; ?>" readonly>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="card">
+					<div class="card-header bg-danger">
+						<center><h5>No Antrian</h5></center>
+					</div>
+					<div class="card-body">
+						<center><h3><input type="text" name="no_antrian" class="form-control" value="<?= $no_antrian; ?>" readonly></h3></center>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-header bg-danger">
+						<center><h5>No RM</h5></center>
+					</div>
+					<div class="card-body">
+						<center><h3><input type="text" name="no_rm" class="form-control" value="<?= $no_rm; ?>" readonly></h3></center>
+					</div>
 				</div>
 			</div>
 			<div class="col-sm-12">

@@ -82,14 +82,6 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="staff.php?page=mystaff" class="nav-link text-white">
-              <i class="nav-icon fas fa-user"></i>
-              <p>
-                My Saff
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="staff.php?page=jadwal_praktek" class="nav-link text-white">
               <i class="nav-icon fas fa-clipboard-list"></i>
               <p>
@@ -97,9 +89,33 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="staff.php?page=dokter_specialis" class="nav-link text-white">
+              <i class="nav-icon fas fa-user-md"></i>
+              <p>
+                Dokter dan Specialis
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="staff.php?page=pasien" class="nav-link text-white">
+              <i class="nav-icon fas fa-user-injured"></i>
+              <p>
+                Data Pasien
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="staff.php?page=mystaff" class="nav-link text-white">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                My Saff
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
-      <!-- /.sidebar-menu -->
+      <!-- /.sidebar-menu-->
     </div>
     <!-- /.sidebar -->
   </aside>
@@ -120,6 +136,12 @@
               break;
             case 'jadwal_praktek':
               include "page/staff/jadwal_praktek.php";
+              break;
+            case 'dokter_specialis':
+              include "page/staff/dokter_specialis.php";
+              break;
+            case 'pasien':
+              include "page/staff/pasien.php";
               break;
             case 'contact_us':
               include "contact_us.php";

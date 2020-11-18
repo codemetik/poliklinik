@@ -121,9 +121,6 @@
             case 'jadwal_praktek':
               include "page/dokter/jadwal_praktek.php";
               break;
-            case 'staff':
-              include "page/admin/users/staff.php";
-              break;
             case 'contact_us':
               include "contact_us.php";
               break;

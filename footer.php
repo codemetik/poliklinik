@@ -58,6 +58,36 @@
             });
          });
     });
+
+    $(document).ready(function(){
+        $('#pasien').on('show.bs.modal', function (e) {
+            var rowid = $(e.relatedTarget).data('id');
+            //menggunakan fungsi ajax untuk pengambilan data
+            $.ajax({
+                type : 'post',
+                url : 'page/staff/detail_pasien.php',
+                data :  'rowid='+ rowid,
+                success : function(data){
+                $('.fetched-dataperiksapasien').html(data);//menampilkan data ke dalam modal
+                }
+            });
+         });
+    });
+
+    $(document).ready(function(){
+        $('#jadwalPraktek').on('show.bs.modal', function (e) {
+            var rowid = $(e.relatedTarget).data('id');
+            //menggunakan fungsi ajax untuk pengambilan data
+            $.ajax({
+                type : 'post',
+                url : 'page/staff/detail_jadwal_praktek.php',
+                data :  'rowid='+ rowid,
+                success : function(data){
+                $('.fetched-datajadwalPraktek').html(data);//menampilkan data ke dalam modal
+                }
+            });
+         });
+    });
 </script>
 <!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -81,6 +111,9 @@
 <!-- PAGE SCRIPTS -->
 <script src="dist/js/pages/dashboard2.js"></script>
 <script src="plugins/select2/js/select2.min.js"></script>
+
+<!-- date-range-picker -->
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
 <script>
 $(function () {
     $('.select2').select2()
@@ -88,6 +121,7 @@ $(function () {
     $('.select2bs4').select2({
       theme: 'bootstrap4'
     })
+
 })
 </script>
 </body>

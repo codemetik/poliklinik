@@ -148,7 +148,7 @@
           <li class="nav-item"><a href="" class="nav-link text-white">Login</a></li>
           <form action="proses_login.php" method="POST">
             <div class="input-group mb-2">
-              <input type="text" class="form-control" name="username" placeholder="Username" autofocus>
+              <input type="text" class="form-control" name="username" placeholder="Username" required autofocus>
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-user"></span>
@@ -156,7 +156,7 @@
               </div>
             </div> 
             <div class="input-group mb-2">
-              <input type="password" class="form-control" name="password" placeholder="Password">
+              <input type="password" class="form-control" name="password" placeholder="Password" required>
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-lock"></span>

@@ -34,6 +34,7 @@ $id_specialis = $spcuser . sprintf("%03s", $nospc);
 				<div class="col-sm-6 mb-2">
 					<a href="" class="btn bg-blue" data-toggle="modal" data-target="#modal-lg"><i class="fa fa-user-plus"></i> Add Dokter</a>
 					<a href="" class="btn bg-blue" data-toggle="modal" data-target="#modal-sm"><i class="fa fa-plus"></i> Add Specialis</a>
+          <a href="" class="btn bg-blue" data-toggle="modal" data-target="#specialis">Table Specialis</a>
 				</div>
 				<div class="col-sm-6 mb-2">
 					<form class="float-right" action="" method="POST">
@@ -287,3 +288,51 @@ if (isset($_POST['simpan_specialis'])) {
             </div>
         </div>
     </div>
+
+
+<div class="modal fade" id="specialis">
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">Table Specialis</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form action="" method="POST">
+    <div class="modal-body">
+      <div class="card">
+        <div class="card-header table-responsive p-0" style="height: 450px;">
+          <table class="table table-head-fixed text-nowrap font-10">
+            <thead>
+              <tr>
+                <th>ID Specialis</th>
+                <th>Specialis</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php 
+              $sp = mysqli_query($koneksi, "SELECT * FROM tb_specialis");
+              while ($dpc = mysqli_fetch_array($sp)) { ?>
+                <tr>
+                  <td><?= $dpc['id_specialis']; ?></td>
+                  <td><?= $dpc['specialis']; ?></td>
+                </tr>
+              <?php }
+              ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer justify-content-between">
+      <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="submit" name="simpan_specialis" class="btn btn-primary">Save changes</button> -->
+    </div>
+  </form>
+  </div>
+  <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

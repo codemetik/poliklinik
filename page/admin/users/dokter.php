@@ -308,6 +308,7 @@ if (isset($_POST['simpan_specialis'])) {
               <tr>
                 <th>ID Specialis</th>
                 <th>Specialis</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -317,6 +318,7 @@ if (isset($_POST['simpan_specialis'])) {
                 <tr>
                   <td><?= $dpc['id_specialis']; ?></td>
                   <td><?= $dpc['specialis']; ?></td>
+                  <td><a href="" class="btn bg-blue"><i class="fa fa-edit"></i></a> || <a href="" class="btn bg-danger"><i class="fa fa-trash-alt"></i></a></td>
                 </tr>
               <?php }
               ?>

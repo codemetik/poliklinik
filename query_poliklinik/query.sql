@@ -134,3 +134,121 @@ INNER JOIN tb_user a ON a.id_user = y.id_user
 SELECT * FROM tb_dokter
 
 SELECT WEEKDAY()
+SELECT * FROM tb_pasien
+SELECT * FROM tb_user
+SELECT * FROM tb_rols_user
+
+SELECT id_pasien, id_dokter, x.id_user, nama_user, jenis_kelamin, gol_darah, tempat_lahir, tanggal_lahir,  
+TIMESTAMPDIFF(YEAR,tanggal_lahir, NOW()) AS umur, agama, tgl_masuk, no_antrian, no_rekam_medis  
+FROM tb_user X 
+LEFT JOIN tb_pasien Y ON y.id_user = x.id_user 
+INNER JOIN tb_rols_user z ON z.id_user = x.id_user 
+WHERE id_bagian = 'BG004' GROUP BY no_antrian ASC 
+
+SELECT id_pasien, id_dokter, x.id_user, nama_user, jenis_kelamin, gol_darah, tempat_lahir, tanggal_lahir, 
+TIMESTAMPDIFF(YEAR,tanggal_lahir, NOW()) AS umur, agama, tgl_masuk, no_antrian, no_rekam_medis, hari, waktu 
+FROM tb_user X 
+LEFT JOIN tb_pasien Y ON y.id_user = x.id_user 
+INNER JOIN tb_rols_user z ON z.id_user = x.id_user 
+WHERE id_bagian = 'BG004' GROUP BY no_antrian DESC
+
+SELECT * FROM tb_dokter X
+INNER JOIN tb_specialis Y ON y.id_specialis = x.id_specialis
+INNER JOIN tb_jadwal_praktek a ON a.id_dokter = x.id_dokter
+INNER JOIN tb_user z ON z.id_user = x.id_user
+
+SELECT * FROM tb_hari
+SELECT * FROM tb_jadwal_praktek
+SELECT * FROM tb_jadwal_praktek
+
+SELECT id_pasien, id_dokter, x.id_user, nama_user, jenis_kelamin, gol_darah, tempat_lahir, tanggal_lahir, 
+TIMESTAMPDIFF(YEAR,tanggal_lahir, NOW()) AS umur, agama, tgl_masuk, no_antrian, no_rekam_medis,hari,waktu FROM tb_user X 
+LEFT JOIN tb_pasien Y ON y.id_user = x.id_user 
+INNER JOIN tb_rols_user z ON z.id_user = x.id_user 
+WHERE id_bagian = 'BG004' GROUP BY no_antrian DESC
+
+SELECT * FROM tb_user
+SELECT * FROM tb_rols_user
+SELECT * FROM tb_pasien
+
+SELECT * FROM tb_user X
+INNER JOIN tb_rols_user Y ON y.id_user = x.id_user
+INNER JOIN tb_bagian z ON z.id_bagian = y.id_bagian
+
+SELECT * FROM table_specialis_dokter
+
+SELECT * FROM tb_user X
+INNER JOIN tb_rols_user Y ON y.id_user = x.id_user
+INNER JOIN tb_bagian z ON z.id_bagian = y.id_bagian
+
+SELECT * FROM tb_pasien
+SELECT * FROM tb_hari
+
+SELECT id_pasien, id_dokter, x.id_user, nama_user, jenis_kelamin, gol_darah, tempat_lahir, tanggal_lahir, 
+TIMESTAMPDIFF(YEAR,tanggal_lahir, NOW()) AS umur, agama, tgl_masuk, no_antrian, no_rekam_medis,hari,waktu 
+FROM tb_user X 
+LEFT JOIN tb_pasien Y ON y.id_user = x.id_user 
+INNER JOIN tb_rols_user z ON z.id_user = x.id_user 
+WHERE id_bagian = 'BG004' GROUP BY no_antrian DESC
+
+SELECT x.id_user, username, PASSWORD, confirm_password, nama_user, jenis_kelamin, gol_darah, tempat_lahir, tanggal_lahir, 
+TIMESTAMPDIFF(YEAR, tanggal_lahir, NOW()) AS usia, agama, 
+tgl_masuk, id_rols_user, id_bagian, tgl_user_regis 
+FROM tb_user X
+INNER JOIN tb_rols_user Y ON y.id_user = x.id_user 
+WHERE id_bagian = 'BG004'
+
+SELECT * FROM tb_pasien
+
+SELECT WEEKDAY('2020-11-30 20:09:44')
+SELECT NOW() 2020-11-26 20:09:44
+
+0=senin,1=selasa,2=rabu,3=kamis,4=jumat,5=sabtu,6=minggu,
+
+SELECT IF(WEEKDAY(NOW())= '0','senin',
+IF(WEEKDAY(NOW())='1','selasa',
+IF(WEEKDAY(NOW())='2','rabu',
+IF(WEEKDAY(NOW())='3','kamis',
+IF(WEEKDAY(NOW())='4','jumat',
+IF(WEEKDAY(NOW())='5','sabtu',
+IF(WEEKDAY(NOW())='6','minggu','salah'))))))) 
+AS hari
+
+SELECT NOW()
+
+SELECT DATE(NOW())
+SELECT WEEKDAY(DATE(NOW()))
+
+SELECT WEEKDAY('20201126')
+
+SELECT * FROM tb_pasien_baru
+SELECT * FROM tb_rols_user
+
+SELECT * FROM tb_user
+
+SELECT MAX(no_antrian) FROM tb_pasien_baru
+
+SELECT * FROM posting_pendaftaran
+
+SELECT x.id_user,no_antrian, hari AS hari_daftar,username, PASSWORD, confirm_password, nama_user, jenis_kelamin, gol_darah, 
+tempat_lahir, tanggal_lahir, 
+TIMESTAMPDIFF(YEAR, tanggal_lahir, NOW()) AS usia, agama, tgl_masuk, id_rols_user, id_bagian, y.tgl_user_regis 
+FROM tb_user X 
+INNER JOIN tb_rols_user Y ON y.id_user = x.id_user 
+INNER JOIN tb_pasien_baru z ON z.id_user = x.id_user
+WHERE id_bagian = 'BG004' GROUP BY no_antrian DESC
+
+SELECT * FROM tb_pasien_baru
+
+SELECT * FROM tb_pasien
+SELECT * FROM tb_rols_user
+SELECT * FROM tb_user
+
+SELECT hari FROM tb_pasien
+
+SELECT x.id_user,no_antrian, hari AS hari_daftar,username, PASSWORD, confirm_password, nama_user, 
+jenis_kelamin, gol_darah, tempat_lahir, tanggal_lahir, TIMESTAMPDIFF(YEAR, tanggal_lahir, NOW()) AS usia, agama, tgl_masuk, 
+id_rols_user, id_bagian, y.tgl_user_regis 
+FROM tb_user X 
+INNER JOIN tb_rols_user Y ON y.id_user = x.id_user 
+INNER JOIN tb_pasien_baru z ON z.id_user = x.id_user WHERE id_bagian = 'BG004' GROUP BY no_antrian DESC

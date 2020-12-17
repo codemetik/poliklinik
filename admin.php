@@ -33,7 +33,7 @@
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <span class="dropdown-item dropdown-header">SETTINGS</span>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
+          <a href="admin.php?page=myadmin" class="dropdown-item">
             <i class="fas fa-user mr-2"></i> <?= $_SESSION['username']; ?>
           </a>
           <div class="dropdown-divider"></div>
@@ -137,6 +137,9 @@
               break;
             case 'staff':
               include "page/admin/users/staff.php";
+              break;
+            case 'myadmin':
+              include "page/admin/myadmin.php";
               break;
             case 'contact_us':
               include "contact_us.php";

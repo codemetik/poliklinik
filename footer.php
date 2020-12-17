@@ -88,6 +88,21 @@
             });
          });
     });
+
+    $(document).ready(function(){
+        $('#antrian').on('show.bs.modal', function (e) {
+            var rowid = $(e.relatedTarget).data('id');
+            //menggunakan fungsi ajax untuk pengambilan data
+            $.ajax({
+                type : 'post',
+                url : 'page/staff/detail_antrian_pasien.php',
+                data :  'rowid='+ rowid,
+                success : function(data){
+                $('.fetched-dataantrian').html(data);//menampilkan data ke dalam modal
+                }
+            });
+         });
+    });
 </script>
 <!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>

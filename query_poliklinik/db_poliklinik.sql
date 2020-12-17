@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 18 Nov 2020 pada 13.36
+-- Waktu pembuatan: 17 Des 2020 pada 09.47
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.4.9
 
@@ -20,6 +20,26 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_poliklinik`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `posting_pendaftaran`
+--
+
+CREATE TABLE `posting_pendaftaran` (
+  `id_posting` int(15) NOT NULL,
+  `judul` varchar(15) NOT NULL,
+  `deskripsi` varchar(5000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `posting_pendaftaran`
+--
+
+INSERT INTO `posting_pendaftaran` (`id_posting`, `judul`, `deskripsi`) VALUES
+(1, 'Pasien Baru', 'Bagi pasien baru atau pertama kali akan melakukan pendaftaran pasien silahkan REGISTRASI terlebih dahulu kemudianlakukan login untuk melakukan pendaftaran lebih lanjut.'),
+(2, 'Pasien Lama', 'Bagi pasien lama atau yang sudah pernah periksa, silahkan langsung melakukan login untuk pendaftaran pasien.');
 
 -- --------------------------------------------------------
 
@@ -161,19 +181,42 @@ CREATE TABLE `tb_pasien` (
   `id_pasien` char(15) NOT NULL,
   `id_dokter` char(15) NOT NULL,
   `id_user` char(15) NOT NULL,
-  `no_antrian` char(15) NOT NULL,
-  `no_rekam_medis` char(15) NOT NULL,
+  `no_antrian` char(16) NOT NULL,
+  `no_rekam_medis` char(16) NOT NULL,
   `waktu` varchar(225) NOT NULL,
-  `hari` varchar(225) NOT NULL
+  `hari_periksa` varchar(225) NOT NULL,
+  `nomor_antri` char(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `tb_pasien`
 --
 
-INSERT INTO `tb_pasien` (`id_pasien`, `id_dokter`, `id_user`, `no_antrian`, `no_rekam_medis`, `waktu`, `hari`) VALUES
-('PSN0001', '3', 'USR0010', 'AN0001', 'RM0001', '', ''),
-('PSN0002', '5', 'USR0011', 'AN0002', 'RM0002', '', '');
+INSERT INTO `tb_pasien` (`id_pasien`, `id_dokter`, `id_user`, `no_antrian`, `no_rekam_medis`, `waktu`, `hari_periksa`, `nomor_antri`) VALUES
+('PSN0001', '5', 'USR0010', '', 'RM-20201202-0001', '07:00', 'Senin', '07:00'),
+('PSN0002', '3', 'USR0011', '', 'RM-20201203-0002', '08:00', 'Senin', '');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_pasien_baru`
+--
+
+CREATE TABLE `tb_pasien_baru` (
+  `no_antrian` char(16) NOT NULL,
+  `hari` varchar(15) NOT NULL,
+  `id_user` char(15) NOT NULL,
+  `tgl_user_regis` varchar(225) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_pasien_baru`
+--
+
+INSERT INTO `tb_pasien_baru` (`no_antrian`, `hari`, `id_user`, `tgl_user_regis`) VALUES
+('AN-20201202-0002', 'Rabu', 'USR0010', '2020-12-02 06:33:25'),
+('AN-20201203-0003', 'Kamis', 'USR0011', '2020-12-03 12:24:14'),
+('AN-20201203-0004', 'Kamis', 'USR0012', '2020-12-03 07:15:29');
 
 -- --------------------------------------------------------
 
@@ -199,8 +242,9 @@ INSERT INTO `tb_rols_user` (`id_rols_user`, `id_user`, `id_bagian`, `tgl_user_re
 ('ROLS0006', 'USR0006', 'BG003', '2020-11-10 08:19:05'),
 ('ROLS0007', 'USR0007', 'BG002', '2020-11-10 08:54:33'),
 ('ROLS0009', 'USR0009', 'BG003', '2020-11-11 08:47:02'),
-('ROLS0010', 'USR0010', 'BG004', '2020-11-18 02:18:55'),
-('ROLS0011', 'USR0011', 'BG004', '2020-11-18 02:53:17');
+('ROLS0010', 'USR0010', 'BG004', '2020-12-02 06:33:25'),
+('ROLS0011', 'USR0011', 'BG004', '2020-12-03 12:24:14'),
+('ROLS0012', 'USR0012', 'BG004', '2020-12-03 07:15:29');
 
 -- --------------------------------------------------------
 
@@ -268,8 +312,9 @@ INSERT INTO `tb_user` (`id_user`, `username`, `password`, `confirm_password`, `n
 ('USR0006', 'mimin', 'mimin', 'mimin', 'miminahku', 'Perempuan', 'C', 'Jakarta', '1989-02-07', 'Islam', '2020-11-10 08:19:05'),
 ('USR0007', 'dia', 'dian', 'dian', 'diandi', 'Laki-laki', 'A', 'Tangerang', '2020-11-02', 'Islam', '2020-11-10 08:54:33'),
 ('USR0009', 'jiwa', 'jiwa', 'jiwa', 'jiwa', 'Laki-laki', 'A', 'Bali', '2020-11-04', 'Islam', '2020-11-11 08:47:02'),
-('USR0010', 'pasien1', 'pasien1', 'pasien1', 'pasien1', 'Laki-laki', 'B', 'Pamulang', '1993-02-10', 'Islam', '2020-11-18 02:18:55'),
-('USR0011', 'pasien2', 'pasien2', 'pasien2', 'pasien2', 'Perempuan', 'A', 'Bandung', '1994-09-12', 'Islam', '2020-11-18 02:53:17');
+('USR0010', 'akupasien', 'akupasien', 'akupasien', 'akupasien', 'Laki-laki', 'B', 'Pamulang', '2020-12-02', 'Islam', '2020-12-02 06:33:25'),
+('USR0011', 'kamu', 'kamu', 'kamu', 'kamu', 'Laki-laki', 'B', 'Tangerang', '2020-12-03', 'Islam', '2020-12-03 12:24:14'),
+('USR0012', 'dia', 'dia', 'dia', 'dia', 'Perempuan', 'A', 'Semarang', '2020-12-03', 'Islam', '2020-12-03 07:15:29');
 
 -- --------------------------------------------------------
 
@@ -283,6 +328,12 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indeks untuk tabel `posting_pendaftaran`
+--
+ALTER TABLE `posting_pendaftaran`
+  ADD PRIMARY KEY (`id_posting`);
 
 --
 -- Indeks untuk tabel `tb_bagian`
@@ -317,6 +368,19 @@ ALTER TABLE `tb_jenis_kelamin`
   ADD PRIMARY KEY (`id_jk`);
 
 --
+-- Indeks untuk tabel `tb_pasien`
+--
+ALTER TABLE `tb_pasien`
+  ADD KEY `no_antrian` (`no_antrian`);
+
+--
+-- Indeks untuk tabel `tb_pasien_baru`
+--
+ALTER TABLE `tb_pasien_baru`
+  ADD PRIMARY KEY (`no_antrian`),
+  ADD KEY `id_user` (`id_user`);
+
+--
 -- Indeks untuk tabel `tb_rols_user`
 --
 ALTER TABLE `tb_rols_user`
@@ -339,6 +403,12 @@ ALTER TABLE `tb_user`
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
 --
+
+--
+-- AUTO_INCREMENT untuk tabel `posting_pendaftaran`
+--
+ALTER TABLE `posting_pendaftaran`
+  MODIFY `id_posting` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_dokter`
@@ -374,6 +444,12 @@ ALTER TABLE `tb_jenis_kelamin`
 ALTER TABLE `tb_dokter`
   ADD CONSTRAINT `tb_dokter_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `tb_user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tb_dokter_ibfk_2` FOREIGN KEY (`id_specialis`) REFERENCES `tb_specialis` (`id_specialis`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `tb_pasien_baru`
+--
+ALTER TABLE `tb_pasien_baru`
+  ADD CONSTRAINT `tb_pasien_baru_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `tb_user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `tb_rols_user`

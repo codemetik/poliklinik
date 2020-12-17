@@ -6,7 +6,7 @@ $id_us = mysqli_fetch_array($sql);
 	<div class="col-sm-12">
 		<ol class="breadcrumb mt-2">
           <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active">My Staff</li>
+          <li class="breadcrumb-item active">My Admin</li>
         </ol>
 	</div>
 </div>
@@ -15,7 +15,7 @@ $id_us = mysqli_fetch_array($sql);
 		<h5>SETTING MY PROFIL</h5>
 	</div>
 	<div class="card-body">
-	<form action="page/staff/proses/proses_edit_mystaff.php" method="POST">
+	<form action="page/dokter/proses/proses_edit_dokter.php" method="POST">
 		<div class="row">
 			<div class="col-sm-3">
 				<div class="form-group">
@@ -73,17 +73,6 @@ $id_us = mysqli_fetch_array($sql);
 				<div class="form-group">
 					<label>Agama</label>
 					<input type="text" name="agama" class="form-control" value="<?= $id_us['agama']; ?>">
-				</div>
-				<div class="form-group">
-					<label>Pilih Specialis</label>
-					<select name="id_dokter" class="form-control-sm select2" style="width: 100%;" required>
-					<?php 
-					$sql = mysqli_query($koneksi, "SELECT x.id_specialis, specialis, IFNULL(z.id_user,'Kosong') AS id_user , CONCAT('Dr. ',IFNULL(nama_user,'Kosong')) AS nama_user, IFNULL(id_dokter,'Kosong') AS id_dokter FROM tb_specialis X LEFT JOIN tb_dokter Y ON y.id_specialis = x.id_specialis LEFT JOIN tb_user z ON z.id_user = y.id_user GROUP BY id_specialis ASC");
-					while ($data = mysqli_fetch_array($sql)) { ?>
-						<option value="<?= $data['id_dokter']; ?>"><?= $data['specialis']." || ".$data['nama_user']; ?></option>
-					<?php }
-					?>
-					</select>
 				</div>
 				<?php 
 	      		date_default_timezone_set('Asia/Jakarta'); 

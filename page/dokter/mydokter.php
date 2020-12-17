@@ -12,7 +12,7 @@ $id_us = mysqli_fetch_array($sql);
 </div>
 <div class="card">
 	<div class="card-header bg-blue">
-		<h5>My Dokter</h5>
+		<h5>SETTING MY PROFIL</h5>
 	</div>
 	<div class="card-body">
 	<form action="page/dokter/proses/proses_edit_dokter.php" method="POST">

@@ -33,7 +33,7 @@
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <span class="dropdown-item dropdown-header">SETTINGS</span>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
+          <a href="?page=dataku" class="dropdown-item">
             <i class="fas fa-user mr-2"></i> <?= $_SESSION['username']; ?>
           </a>
           <div class="dropdown-divider"></div>
@@ -117,10 +117,10 @@
         if (isset($_SESSION['id_user'])) { ?>
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-              <a href="?page=dataku" class="nav-link text-white">
+              <a href="?page=pendaftaran_pasienlama" class="nav-link text-white">
                 <i class="nav-icon fas fa-user"></i>
                 <p>
-                  My Data
+                  Pendaftarann Pasien
                 </p>
               </a>
             </li>
@@ -135,11 +135,11 @@
           </ul>
           
         <?php }else{ ?>
-          <hr class="bg-dark"> <!--buka pilihan-->
-          <ul class="nav nav-pills nav-sidebar flex-column">
+        <hr class="bg-dark">
+        <ul class="nav nav-pills nav-sidebar flex-column">
           <li class="nav-item">
-            <a href="?page=contact_us" class="nav-link text-white">
-                Register
+            <a href="?page=register" class="nav-link text-white">
+              Register
             </a>
           </li>
         </ul>
@@ -229,8 +229,11 @@
             case 'jadwal_praktek':
               include "home/jadwal_praktek.php";
               break;
+            case 'register':
+              include "home/register_pasien.php";
+              break;
             case 'pendaftaran':
-              include "home/pendaftaran_pasien.php";
+              include "home/pendaftaran.php";
               break;
             case 'layanan':
               include "home/informasi_pelayanan.php";
@@ -243,6 +246,9 @@
               break;
             case 'dataku':
               include "page/pasien/dataku.php";
+              break;
+            case 'pendaftaran_pasienlama':
+              include "page/pasien/pendaftaran_pasienlama.php";
               break;
             
             default:

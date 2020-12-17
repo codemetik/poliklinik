@@ -33,7 +33,7 @@
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <span class="dropdown-item dropdown-header">SETTINGS</span>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
+          <a href="staff.php?page=mystaff" class="dropdown-item">
             <i class="fas fa-user mr-2"></i> <?= $_SESSION['username']; ?>
           </a>
           <div class="dropdown-divider"></div>
@@ -97,21 +97,37 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="staff.php?page=pasien" class="nav-link text-white">
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link bg-blue">
               <i class="nav-icon fas fa-user-injured"></i>
               <p>
                 Data Pasien
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item bg-danger">
+                <a href="?page=pasien_baru" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pasien Baru</p>
+                </a>
+              </li>
+              <li class="nav-item bg-danger">
+                <a href="?page=pasien_lama" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pasien Lama</p>
+                </a>
+              </li>
+            </ul>
+            <hr>
+            <li class="nav-item">
+            <a href="staff.php?page=posting_pendaftaran" class="nav-link text-white">
+              <i class="nav-icon fas fa-user-md"></i>
+              <p>
+                Pendaftaran
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="staff.php?page=mystaff" class="nav-link text-white">
-              <i class="nav-icon fas fa-user"></i>
-              <p>
-                My Saff
-              </p>
-            </a>
           </li>
         </ul>
       </nav>
@@ -140,11 +156,17 @@
             case 'dokter_specialis':
               include "page/staff/dokter_specialis.php";
               break;
-            case 'pasien':
-              include "page/staff/pasien.php";
+            case 'pasien_baru':
+              include "page/staff/pasien_baru.php";
+              break;
+            case 'pasien_lama':
+              include "page/staff/pasien_lama.php";
               break;
             case 'contact_us':
               include "contact_us.php";
+              break;
+            case 'posting_pendaftaran':
+              include "page/staff/blog_pendaftaran.php";
               break;
             
             default:

@@ -12,7 +12,7 @@ $id_us = mysqli_fetch_array($sql);
 </div>
 <div class="card">
 	<div class="card-header">
-		<h5>My Data</h5>
+		<h5>SETTING MY PROFIL</h5>
 	</div>
 	<div class="card-body">
 	<form action="page/pasien/proses/proses_edit_pasien.php" method="POST">
@@ -73,17 +73,6 @@ $id_us = mysqli_fetch_array($sql);
 				<div class="form-group">
 					<label>Agama</label>
 					<input type="text" name="agama" class="form-control" value="<?= $id_us['agama']; ?>">
-				</div>
-				<div class="form-group">
-					<label>Pilih Specialis</label>
-					<select name="id_dokter" class="form-control-sm select2" style="width: 100%;" required>
-					<?php 
-					$sql = mysqli_query($koneksi, "SELECT x.id_specialis, specialis, IFNULL(z.id_user,'Kosong') AS id_user , CONCAT('Dr. ',IFNULL(nama_user,'Kosong')) AS nama_user, IFNULL(id_dokter,'Kosong') AS id_dokter FROM tb_specialis X LEFT JOIN tb_dokter Y ON y.id_specialis = x.id_specialis LEFT JOIN tb_user z ON z.id_user = y.id_user GROUP BY id_specialis ASC");
-					while ($data = mysqli_fetch_array($sql)) { ?>
-						<option value="<?= $data['id_dokter']; ?>"><?= $data['specialis']." || ".$data['nama_user']; ?></option>
-					<?php }
-					?>
-					</select>
 				</div>
 				<?php 
 	      		date_default_timezone_set('Asia/Jakarta'); 

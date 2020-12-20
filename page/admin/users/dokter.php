@@ -87,7 +87,7 @@ $id_specialis = $spcuser . sprintf("%03s", $nospc);
 								<td><?= $data['tgl_masuk']; ?></td>
 								<td>
 									<!-- <a href="admin.php?page=edit_dokter&id=" class="btn bg-blue"><i  class="fa fa-edit"></i></a> -->
-									<a href="#myDokter" id='custId' data-toggle='modal' data-id="<?= $data['id_user'] ?>" class="btn bg-blue"><i  class="fa fa-edit"></i></a> || <a href="page/admin/proses/proses_delete_dokter.php?id=<?= $data['id_user']; ?>" class="btn bg-danger"><i class="fa fa-trash-alt"></i></a>
+									<a href="#myDokter" id='custId' data-toggle='modal' data-id="<?= $data['id_user'] ?>" class="btn bg-blue"><i  class="fa fa-edit"></i></a> || <a href="page/admin/proses/proses_delete_dokter.php?id=<?= $data['id_user']; ?>" class="btn bg-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data dokter ini?')"><i class="fa fa-trash-alt"></i></a>
 								</td>
 							</tr>
 						<?php }
@@ -318,7 +318,7 @@ if (isset($_POST['simpan_specialis'])) {
                 <tr>
                   <td><?= $dpc['id_specialis']; ?></td>
                   <td><?= $dpc['specialis']; ?></td>
-                  <td><a href="" class="btn bg-blue"><i class="fa fa-edit"></i></a> || <a href="" class="btn bg-danger"><i class="fa fa-trash-alt"></i></a></td>
+                  <td><a href="#editspecialis" data-toggle="modal" data-id="<?= $dpc['id_specialis']; ?>" class="btn bg-blue"><i class="fa fa-edit"></i></a> || <a href="page/admin/proses/proses_delete_specialis.php?id=<?= $dpc['id_specialis']; ?>" class="btn bg-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data specialis ini?')"><i class="fa fa-trash-alt"></i></a></td>
                 </tr>
               <?php }
               ?>
@@ -330,6 +330,34 @@ if (isset($_POST['simpan_specialis'])) {
     <div class="modal-footer justify-content-between">
       <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       <button type="submit" name="simpan_specialis" class="btn btn-primary">Save changes</button> -->
+    </div>
+  </form>
+  </div>
+  <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+<div class="modal fade" id="editspecialis">
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">Edit Specialis</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form action="page/admin/proses/proses_edit_specialis.php" method="POST">
+    <div class="modal-body">
+        <div class="fetched-editspecialis">
+          <!-- isi form -->
+        </div>
+    </div>
+    <div class="modal-footer justify-content-between">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="submit" name="simpan_perubahan" class="btn btn-primary">Save changes</button>
     </div>
   </form>
   </div>

@@ -103,6 +103,22 @@
             });
          });
     });
+
+    //untuk edit specialis dokter
+    $(document).ready(function(){
+        $('#editspecialis').on('show.bs.modal', function (e) {
+            var rowid = $(e.relatedTarget).data('id');
+            //menggunakan fungsi ajax untuk pengambilan data
+            $.ajax({
+                type : 'post',
+                url : 'page/admin/users/detail_edit_specialis.php',
+                data :  'rowid='+ rowid,
+                success : function(data){
+                $('.fetched-editspecialis').html(data);//menampilkan data ke dalam modal
+                }
+            });
+         });
+    });
 </script>
 <!-- Bootstrap -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>

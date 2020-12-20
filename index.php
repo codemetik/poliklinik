@@ -64,7 +64,7 @@
     </a>
 
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar bg-gray">
       <!-- Sidebar user panel (optional) -->
       
 
@@ -125,10 +125,10 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="?page=jadwal" class="nav-link text-white">
+              <a href="?page=antrian_pasien" class="nav-link text-white">
                 <i class="nav-icon fas fa-clipboard-list"></i>
                 <p>
-                  Jadwal
+                  Antrian Pasien
                 </p>
               </a>
             </li>
@@ -172,14 +172,14 @@
         <?php }
         ?>
         <hr class="bg-dark"> <!--tutup pilihan-->
-        <ul class="nav nav-pills nav-sidebar flex-column">
+        <!-- <ul class="nav nav-pills nav-sidebar flex-column">
           <li class="nav-item">
             <a href="?page=contact_us" class="nav-link text-white">
               
                 Contact Us
             </a>
           </li>
-        </ul>
+        </ul> -->
       </nav>
       <!-- /.sidebar-menu -->
     </div>
@@ -238,8 +238,8 @@
             case 'layanan':
               include "home/informasi_pelayanan.php";
               break;
-            case 'jadwal':
-              include "page/pasien/jadwal.php";
+            case 'antrian_pasien':
+              include "page/pasien/antrian_pasien.php";
               break;
             case 'contact_us':
               include "contact_us.php";

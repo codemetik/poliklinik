@@ -6,13 +6,13 @@
         </ol>
 	</div>
 </div>
-<div class="card">
+<div class="card m-5">
 	<div class="card-header bg-blue">
-		<h5>Pendaftaran</h5>
+		<h5>Informasi Pendaftaran</h5>
 	</div>
 	<div class="card-body">
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-sm-12">
         <?php 
         $sql = mysqli_query($koneksi, "SELECT * FROM posting_pendaftaran");
         while ($data = mysqli_fetch_array($sql)) { ?>

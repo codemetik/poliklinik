@@ -39,7 +39,7 @@
 								<td><?= $ds['hari_awal']." - ".$ds['hari_akhir']; ?></td>
 								<td><?= $ds['waktu_buka']." - ".$ds['waktu_tutup']; ?></td>
 								<td>
-									<a href="#jadwalPraktek" id='custId' data-toggle='modal' data-id="<?= $ds['id_dokter'] ?>" class="btn bg-blue"><i class="fa fa-edit"></i></a>
+									<a href="#jadwalPraktek" id='custId' data-toggle='modal' data-id="<?= $ds['id_dokter'] ?>" class="btn bg-blue"><i class="fa fa-edit"></i></a> || <a href="page/staff/proses/delete_jadwal_praktek.php?id=<?= $ds['id_jadwal_praktek']; ?>" class="btn bg-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data jadwal praktek ini?')"><i class="fa fa-trash-alt"></i></a>
 								</td>
 							</tr>
 						<?php }

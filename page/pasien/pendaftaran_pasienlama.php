@@ -10,19 +10,24 @@
 // $no_rm = $pi. $date ."-". sprintf("%04s", $pasi);
 
 date_default_timezone_set('Asia/Jakarta'); 
-$usernip = mysqli_query($koneksi, "SELECT max(no_antrian) AS no_antri, max(no_rekam_medis) AS maxCode FROM tb_pasien");
+$usernip = mysqli_query($koneksi, "SELECT max(no_antrian) AS no_antri, max(no_rekam_medis) AS maxCode, max(nomor_antri) AS nomor_antri FROM tb_pasien");
 $idnip = mysqli_fetch_array($usernip);
 $a = $idnip['no_antri'];
 $id = $idnip['maxCode'];
+$antri = $idnip['nomor_antri'];
 $nOan = (int) substr($a, 12, 4);
 $nOn = (int) substr($id, 12, 4);
+$nOAntri = (int) substr($antri, 7, 3);
 $nOn++;
-$nOan++; 
+$nOan++;
+$nOAntri++; 
 $date = date("Ymd");
 $an = "AN-".$date."-";
 $rm = "RM-".$date."-";
+$isno = "ANTRIAN";
 $no_antrian = $an . sprintf("%04s", $nOan);
 $no_rm = $rm . sprintf("%04s", $nOn);
+$nomor_antrian = $isno . sprintf("%03s", $nOAntri);
 
 $cek_hari = mysqli_query($koneksi, "SELECT IF(WEEKDAY(".$date.")= '0','Senin',
 IF(WEEKDAY(".$date.")='1','Selasa',
@@ -55,32 +60,32 @@ $dpas = mysqli_fetch_array($sqps);
 	</div>
 </div>
 <div class="card">
-	<div class="card-header bg-blue">
+	<div class="card-header bg-dark">
 		<h5 class="card-title">Pendaftaran Pasien Periksa</h5>
 	</div>
 	<div class="card-body">
-		<div class="row">
+		<div class="row bg-gray mb-2">
 			<div class="col-sm-6">
 				<table class="table table-responsive">
 					<tr>
 						<th><button class="btn bg-danger">No Antrian dan No RM</button></th>
-						<td>Menandakan Pasien Baru</td>
+						<td>= Menandakan Pasien Baru</td>
 					</tr>
 					<tr>
 						<th><button class="btn bg-green">No Antrian dan No RM</button></th>
-						<td>Menandakan Pasien Lama</td>
+						<td>= Menandakan Pasien Lama</td>
 					</tr>
 				</table>
 			</div>
 			<div class="col-sm-6">
-				<div class="alert bg-gray">
-					Jika <i>"No Rekam Medis"</i> Terdapat Warna <button class="btn bg-success">Hijau</button> maka Pasien menandakan user Lama.
+				<div class="alert">
+					*Jika <i>"No Rekam Medis"</i> Terdapat Warna <button class="btn bg-success">Hijau</button> maka Pasien menandakan user Lama (Sudah pernah melakukan pendaftaran periksa).
 				</div>
 			</div>		
 		</div>
 	<form action="page/pasien/proses/proses_daftar_pasienlama.php" method="POST">
 		<div class="row">
-			<div class="col-sm-4">
+			<div class="col-sm-2">
 				<div class="form-group">
 					<label>ID User</label>
 					<input type="text" name="id_user" class="form-control" readonly value="<?= $_SESSION['id_user']; ?>">
@@ -101,7 +106,7 @@ $dpas = mysqli_fetch_array($sqps);
 			</div>
 			<div class="col-sm-4">
 				<div class="form-group">
-					<label>No Antrian</label>
+					<label>No Antrian Regis</label>
 					<?php 
 					$cekps = mysqli_query($koneksi, "SELECT * FROM tb_pasien WHERE id_user = '".$_SESSION['id_user']."'");
 					$dcek = mysqli_num_rows($cekps);
@@ -132,12 +137,12 @@ $dpas = mysqli_fetch_array($sqps);
 					</select>
 				</div>	
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-3">
 				<div class="card">
 					<div class="card-header bg-danger">
-						<center><h5>No RM</h5></center>
+						<center><h5>No Rekam Medis</h5></center>
 					</div>
-					<div class="card-body">
+					<div class="card-body bg-gray">
 						<?php 
 						$cekps = mysqli_query($koneksi, "SELECT * FROM tb_pasien WHERE id_user = '".$_SESSION['id_user']."'");
 						$dcek = mysqli_num_rows($cekps);
@@ -154,6 +159,32 @@ $dpas = mysqli_fetch_array($sqps);
 					</div>
 				</div>
 			</div>
+			<div class="col-sm-3">
+				<div class="card">
+					<div class="card-header bg-danger">
+						<center><h5>Nomor Antri Anda</h5></center>
+					</div>
+					<div class="card-body bg-gray">
+						<?php 
+						$cekps = mysqli_query($koneksi, "SELECT * FROM tb_pasien WHERE id_user = '".$_SESSION['id_user']."'");
+						$dcek = mysqli_num_rows($cekps);
+						$dataps = mysqli_fetch_array($cekps);
+						if ($dcek > 0) { 
+							if ($dataps['nomor_antri'] == "") { ?>
+								<center><h3><input type="text" name="nomor_antrian" class="form-control bg-danger" value="<?= $nomor_antrian; ?>" readonly></h3></center>
+							<?php }else{ ?>
+								<center><h3><input type="text" name="nomor_antrian" class="form-control bg-green" value="<?= $dataps['nomor_antri']; ?>" readonly></h3></center>
+							<?php }
+						}else{ ?>
+							<center><h3><input type="text" name="nomor_antrian" class="form-control bg-danger" value="<?= $nomor_antrian; ?>" readonly></h3></center>
+						<?php }
+						?>
+					</div>
+					<div class="card-body bg-gray">
+						
+					</div>
+				</div>
+			</div>
 			<div class="col-sm-4">
 				<?php 
 					$cekps = mysqli_query($koneksi, "SELECT * FROM tb_pasien WHERE id_user = '".$_SESSION['id_user']."'");
@@ -163,8 +194,11 @@ $dpas = mysqli_fetch_array($sqps);
 						
 						if ($dataps['no_antrian'] == "") { ?>
 							<button type="submit" name="daftar" class="form-control bg-blue">Daftar</button>
-						<?php }else{ ?>
-							
+						<?php }else{ 
+							$sqlmenunggu = mysqli_query($koneksi, "SELECT CONCAT(COUNT(*) - 1,' Orang Lagi') as menunggu FROM tb_pasien WHERE nomor_antri != ''");
+							$dmenunggu = mysqli_fetch_array($sqlmenunggu);
+							?>
+							<a href="" class="btn bg-blue">Anda Sedang menunggu <?= $dmenunggu['menunggu']; ?></a>
 						<?php }
 
 					}else{ ?>

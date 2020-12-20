@@ -23,6 +23,7 @@
 					<table class="table table-hover table-bordered">
 						<thead class="bg-success">
 							<tr>
+								<th>ID User</th>
 								<th>Nama Pasien</th>
 								<th>Jenis kelamin</th>
 								<th>Tempat Lahir</th>
@@ -36,13 +37,14 @@
 						<?php 
 						if (isset($_POST['tampil'])) {
 							$search = $_POST['search'];
-							$sql = mysqli_query($koneksi, "SELECT * FROM tb_user X INNER JOIN tb_rols_user Y ON y.id_user = x.id_user INNER JOIN tb_bagian z ON z.id_bagian = y.id_bagian WHERE y.id_bagian = 'BG004' AND nama_user = '%".$search."%'");
+							$sql = mysqli_query($koneksi, "SELECT * FROM tb_user X INNER JOIN tb_rols_user Y ON y.id_user = x.id_user INNER JOIN tb_bagian z ON z.id_bagian = y.id_bagian WHERE y.id_bagian = 'BG004' AND nama_user LIKE '%".$search."%'");
 						}else{
 							$sql = mysqli_query($koneksi, "SELECT * FROM tb_user X INNER JOIN tb_rols_user Y ON y.id_user = x.id_user INNER JOIN tb_bagian z ON z.id_bagian = y.id_bagian WHERE y.id_bagian = 'BG004'");
 						}
 						
 						while ($data = mysqli_fetch_array($sql)) { ?>
 							<tr>
+								<td><?= $data['id_user']; ?></td>
 								<td><?= $data['nama_user']; ?></td>
 								<td><?= $data['jenis_kelamin']; ?></td>
 								<td><?= $data['tempat_lahir']; ?></td>
@@ -50,7 +52,7 @@
 								<td><?= $data['agama']; ?></td>
 								<td><?= $data['tgl_masuk']; ?></td>
 								<td>
-									<a href="#myPasien" id='custId' data-toggle='modal' data-id="<?= $data['id_user'] ?>" class="btn bg-blue"><i  class="fa fa-edit"></i></a> || <a href="page/admin/proses/proses_delete_pasien.php?id=<?= $data['id_user']; ?>" class="btn bg-danger"><i class="fa fa-trash-alt"></i></a>
+									<a href="#myPasien" id='custId' data-toggle='modal' data-id="<?= $data['id_user'] ?>" class="btn bg-blue"><i  class="fa fa-edit"></i></a> || <a href="page/admin/proses/proses_delete_pasien.php?id=<?= $data['id_user']; ?>" class="btn bg-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data pasien ini?')"><i class="fa fa-trash-alt"></i></a>
 								</td>
 							</tr>
 						<?php }

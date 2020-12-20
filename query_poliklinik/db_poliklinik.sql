@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 17 Des 2020 pada 09.47
+-- Waktu pembuatan: 20 Des 2020 pada 19.42
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.4.9
 
@@ -99,9 +99,8 @@ CREATE TABLE `tb_dokter` (
 --
 
 INSERT INTO `tb_dokter` (`id_dokter`, `id_user`, `id_specialis`) VALUES
-(3, 'USR0005', 'SPC003'),
-(5, 'USR0006', 'SPC007'),
-(7, 'USR0009', 'SPC016');
+(10, 'USR0013', 'SPC001'),
+(11, 'USR0014', 'SPC002');
 
 -- --------------------------------------------------------
 
@@ -148,9 +147,8 @@ CREATE TABLE `tb_jadwal_praktek` (
 --
 
 INSERT INTO `tb_jadwal_praktek` (`id_jadwal_praktek`, `id_dokter`, `id_specialis`, `hari_awal`, `hari_akhir`, `waktu_buka`, `waktu_tutup`) VALUES
-(2, '5', 'SPC007', 'Senin', 'Rabu', '07:00', '05:00'),
-(4, '7', 'SPC016', 'Senin', 'Sabtu', '08:00', '05:00'),
-(5, '3', 'SPC003', 'Senin', 'Jumat', '08:00', '12:00');
+(6, '10', 'SPC001', 'Senin', 'Sabtu', '08:00', '16:00'),
+(7, '11', 'SPC002', 'Senin', 'Sabtu', '08:00', '16:00');
 
 -- --------------------------------------------------------
 
@@ -193,8 +191,9 @@ CREATE TABLE `tb_pasien` (
 --
 
 INSERT INTO `tb_pasien` (`id_pasien`, `id_dokter`, `id_user`, `no_antrian`, `no_rekam_medis`, `waktu`, `hari_periksa`, `nomor_antri`) VALUES
-('PSN0001', '5', 'USR0010', '', 'RM-20201202-0001', '07:00', 'Senin', '07:00'),
-('PSN0002', '3', 'USR0011', '', 'RM-20201203-0002', '08:00', 'Senin', '');
+('PSN0001', '11', 'USR0012', 'AN-20201220-0001', 'RM-20201220-0001', '', 'Minggu', 'ANTRIAN001'),
+('PSN0002', '11', 'USR0016', 'AN-20201220-0003', 'RM-20201220-0002', '', 'Minggu', 'ANTRIAN002'),
+('PSN0003', '10', 'USR0015', 'AN-20201220-0002', 'RM-20201221-0003', '', 'Senin', 'ANTRIAN003');
 
 -- --------------------------------------------------------
 
@@ -214,9 +213,9 @@ CREATE TABLE `tb_pasien_baru` (
 --
 
 INSERT INTO `tb_pasien_baru` (`no_antrian`, `hari`, `id_user`, `tgl_user_regis`) VALUES
-('AN-20201202-0002', 'Rabu', 'USR0010', '2020-12-02 06:33:25'),
-('AN-20201203-0003', 'Kamis', 'USR0011', '2020-12-03 12:24:14'),
-('AN-20201203-0004', 'Kamis', 'USR0012', '2020-12-03 07:15:29');
+('AN-20201220-0001', 'Minggu', 'USR0012', '2020-12-20 02:06:57'),
+('AN-20201220-0002', 'Minggu', 'USR0015', '2020-12-20 09:52:56'),
+('AN-20201220-0003', 'Minggu', 'USR0016', '2020-12-20 10:21:26');
 
 -- --------------------------------------------------------
 
@@ -236,15 +235,16 @@ CREATE TABLE `tb_rols_user` (
 --
 
 INSERT INTO `tb_rols_user` (`id_rols_user`, `id_user`, `id_bagian`, `tgl_user_regis`) VALUES
-('ROLS0001', 'USR0001', 'BG001', ''),
-('ROLS0003', 'USR0003', 'BG002', ''),
 ('ROLS0005', 'USR0005', 'BG003', '2020-11-09 10:47:37'),
 ('ROLS0006', 'USR0006', 'BG003', '2020-11-10 08:19:05'),
-('ROLS0007', 'USR0007', 'BG002', '2020-11-10 08:54:33'),
 ('ROLS0009', 'USR0009', 'BG003', '2020-11-11 08:47:02'),
-('ROLS0010', 'USR0010', 'BG004', '2020-12-02 06:33:25'),
-('ROLS0011', 'USR0011', 'BG004', '2020-12-03 12:24:14'),
-('ROLS0012', 'USR0012', 'BG004', '2020-12-03 07:15:29');
+('ROLS0010', 'USR0010', 'BG001', '2020-12-20 02:04:48'),
+('ROLS0011', 'USR0011', 'BG002', '2020-12-20 02:05:45'),
+('ROLS0012', 'USR0012', 'BG004', '2020-12-20 02:06:57'),
+('ROLS0013', 'USR0013', 'BG003', '2020-12-20 02:27:56'),
+('ROLS0014', 'USR0014', 'BG003', '2020-12-20 09:49:00'),
+('ROLS0015', 'USR0015', 'BG004', '2020-12-20 09:52:56'),
+('ROLS0016', 'USR0016', 'BG004', '2020-12-20 10:21:26');
 
 -- --------------------------------------------------------
 
@@ -262,24 +262,8 @@ CREATE TABLE `tb_specialis` (
 --
 
 INSERT INTO `tb_specialis` (`id_specialis`, `specialis`) VALUES
-('SPC001', 'Kandungan'),
-('SPC002', 'Kulit'),
-('SPC003', 'Psikologi Klinis'),
-('SPC004', 'Anak'),
-('SPC005', 'Penyakit Dalam'),
-('SPC006', 'Gigi'),
-('SPC007', 'Jiwa'),
-('SPC008', 'Bedah'),
-('SPC009', 'Saraf'),
-('SPC010', 'Gizi Klinik'),
-('SPC011', 'Jantung'),
-('SPC012', 'THT'),
-('SPC013', 'Mata'),
-('SPC014', 'Paru'),
-('SPC015', 'Medikolegal & Hukum Kesehatan'),
-('SPC016', 'Hewan'),
-('SPC017', 'Fisik & Rehabilitasi'),
-('SPC018', 'Dokter Umum');
+('SPC001', 'Dokter Umum'),
+('SPC002', 'Gigi');
 
 -- --------------------------------------------------------
 
@@ -306,15 +290,16 @@ CREATE TABLE `tb_user` (
 --
 
 INSERT INTO `tb_user` (`id_user`, `username`, `password`, `confirm_password`, `nama_user`, `jenis_kelamin`, `gol_darah`, `tempat_lahir`, `tanggal_lahir`, `agama`, `tgl_masuk`) VALUES
-('USR0001', 'admin', 'admin', 'admin', 'admin', 'Perempuan', 'A', 'Palembang', '1992-11-03', 'Islam', ''),
-('USR0003', 'staff', 'staff', 'staff', 'staff', 'Laki-laki', 'D', 'Semarang', '2020-11-03', 'Islam', ''),
 ('USR0005', 'admin10', 'admin10', 'admin10', 'Maratun', 'Laki-laki', 'B', 'Pamulang', '1983-06-22', 'islam', '2020-11-09 10:47:37'),
 ('USR0006', 'mimin', 'mimin', 'mimin', 'miminahku', 'Perempuan', 'C', 'Jakarta', '1989-02-07', 'Islam', '2020-11-10 08:19:05'),
-('USR0007', 'dia', 'dian', 'dian', 'diandi', 'Laki-laki', 'A', 'Tangerang', '2020-11-02', 'Islam', '2020-11-10 08:54:33'),
 ('USR0009', 'jiwa', 'jiwa', 'jiwa', 'jiwa', 'Laki-laki', 'A', 'Bali', '2020-11-04', 'Islam', '2020-11-11 08:47:02'),
-('USR0010', 'akupasien', 'akupasien', 'akupasien', 'akupasien', 'Laki-laki', 'B', 'Pamulang', '2020-12-02', 'Islam', '2020-12-02 06:33:25'),
-('USR0011', 'kamu', 'kamu', 'kamu', 'kamu', 'Laki-laki', 'B', 'Tangerang', '2020-12-03', 'Islam', '2020-12-03 12:24:14'),
-('USR0012', 'dia', 'dia', 'dia', 'dia', 'Perempuan', 'A', 'Semarang', '2020-12-03', 'Islam', '2020-12-03 07:15:29');
+('USR0010', 'admin', 'admin', 'admin', 'admin', 'Laki-laki', 'B', 'Pamulang', '2020-04-30', 'Islam', '2020-12-20 02:04:48'),
+('USR0011', 'staff', 'staff', 'staff', 'staff', 'Laki-laki', 'A', 'Pamulang', '2020-01-02', 'Islam', '2020-12-20 02:05:45'),
+('USR0012', 'akupasien', 'akupasien', 'akupasien', 'akupasien', 'Laki-laki', 'B', 'Pamulang', '2020-01-02', 'Islam', '2020-12-20 02:06:57'),
+('USR0013', 'mydokter', 'mydokter', 'mydokter', 'mydokter', 'Perempuan', 'B', 'Pamulang', '2020-01-02', 'Islam', '2020-12-20 02:27:56'),
+('USR0014', 'mygigi', 'mygigi', 'mygigi', 'mygigi', 'Perempuan', 'Islam', 'Tangerang', '2020-05-01', 'Islam', '2020-12-20 09:49:00'),
+('USR0015', 'pasien1', 'pasien1', 'pasien1', 'pasien1', 'Perempuan', 'B', 'Pamulang', '2020-03-06', 'Islam', '2020-12-20 09:52:56'),
+('USR0016', 'pasien2', 'pasien2', 'pasien2', 'pasien2', 'Perempuan', 'B', 'Jakarta', '2020-05-01', 'Islam', '2020-12-20 10:21:26');
 
 -- --------------------------------------------------------
 
@@ -371,7 +356,8 @@ ALTER TABLE `tb_jenis_kelamin`
 -- Indeks untuk tabel `tb_pasien`
 --
 ALTER TABLE `tb_pasien`
-  ADD KEY `no_antrian` (`no_antrian`);
+  ADD KEY `no_antrian` (`no_antrian`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indeks untuk tabel `tb_pasien_baru`
@@ -414,7 +400,7 @@ ALTER TABLE `posting_pendaftaran`
 -- AUTO_INCREMENT untuk tabel `tb_dokter`
 --
 ALTER TABLE `tb_dokter`
-  MODIFY `id_dokter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_dokter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_hari`
@@ -426,7 +412,7 @@ ALTER TABLE `tb_hari`
 -- AUTO_INCREMENT untuk tabel `tb_jadwal_praktek`
 --
 ALTER TABLE `tb_jadwal_praktek`
-  MODIFY `id_jadwal_praktek` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_jadwal_praktek` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_jenis_kelamin`
@@ -444,6 +430,12 @@ ALTER TABLE `tb_jenis_kelamin`
 ALTER TABLE `tb_dokter`
   ADD CONSTRAINT `tb_dokter_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `tb_user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tb_dokter_ibfk_2` FOREIGN KEY (`id_specialis`) REFERENCES `tb_specialis` (`id_specialis`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `tb_pasien`
+--
+ALTER TABLE `tb_pasien`
+  ADD CONSTRAINT `tb_pasien_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `tb_user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `tb_pasien_baru`

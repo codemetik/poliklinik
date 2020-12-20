@@ -61,7 +61,7 @@ if($_POST['rowid']) {
                     </div>
                     <div class="form-group">
                         <label>Specialis</label>
-                        <select name="id_specialis" class="form-control select2" style="width: 100%;">
+                        <select name="id_specialis" class="form-control-sm select2" style="width: 100%;">
                             <?php 
                             $sp = mysqli_query($koneksi, "SELECT * FROM tb_specialis");
                             while ($dsp = mysqli_fetch_array($sp)) {
@@ -99,3 +99,15 @@ if($_POST['rowid']) {
         }
     }
 ?>
+
+<script src="../../plugins/daterangepicker/daterangepicker.js"></script>
+<script>
+$(function () {
+    $('.select2').select2()
+
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+
+})
+</script>

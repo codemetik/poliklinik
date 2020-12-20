@@ -6,109 +6,7 @@
           <li class="breadcrumb-item active">Data Pasien Lama</li>
         </ol>
 	</div>
-</div>
-<div class="row">
-	<div class="col-sm-12">
-		<div class="card">
-			<div class="card-header bg-blue">
-				<h5 class="card-title">Data Pasien Lama</h5>
-				<div class="card-tools">
-				<form action="" method="POST">
-				  <div class="input-group input-group-sm" style="width: 150px;">
-				    <input type="text" name="search" class="form-control float-right" placeholder="Search specialis">
-
-				    <div class="input-group-append">
-				      <button type="submit" name="tampil" class="btn btn-default"><i class="fas fa-search"></i></button>
-				    </div>
-				  </div>
-				</form>
-				</div>
-			</div>
-			<div class="card-body table-responsive p-0" style="height: 450px;">
-				<table class="table table-head-fixed text-nowrap table-hover table-bordered font-10">
-					<thead>
-						<tr>
-                                   <th>No</th>
-							<th>No Antrian</th>
-							<th>No Rekam Medis</th>
-							<th>ID User</th>
-							<th>Nama User</th>
-							<th>Jenis Kelamin</th>
-							<th>Gol Darah</th>
-							<th>Tanggal Lahir</th>
-							<th>Umur</th>
-							<th>Agama</th>
-							<th>Action</th>
-						</tr>
-					</thead>
-					<tbody>
-					<?php 
-					$sql = mysqli_query($koneksi, "SELECT no_antrian, no_rekam_medis, x.id_user, nama_user, jenis_kelamin, gol_darah, tanggal_lahir, TIMESTAMPDIFF(YEAR, tanggal_lahir, NOW()) AS usia, agama FROM tb_user X INNER JOIN tb_pasien Y ON y.id_user = x.id_user ORDER BY no_antrian DESC");
-                         $no =1;
-					while ($data = mysqli_fetch_array($sql)) { ?>
-						<tr>
-                                   <td><?= $no++; ?></td>
-							<td><?= $data['no_antrian']; ?></td>
-							<td><?= $data['no_rekam_medis']; ?></td>
-							<td><?= $data['id_user']; ?></td>
-							<td><?= $data['nama_user']; ?></td>
-							<td><?= $data['jenis_kelamin']; ?></td>
-							<td><?= $data['gol_darah']; ?></td>
-							<td><?= $data['tanggal_lahir']; ?></td>
-							<td><?= $data['usia'] ?></td>
-							<td><?= $data['agama']; ?></td>
-							<td>
-								<a href="#pasien" id='custId' data-toggle='modal' data-id="<?= $data['id_user'] ?>" class="btn bg-blue"><i class="fa fa-edit"></i></a>
-							</td>
-						</tr>
-					<?php }
-					?>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
-	<!-- <div class="col-sm-12">
-		<div class="card">
-			<div class="card-header bg-dark">
-				<h5 class="card-title">Data Pasien Lama</h5>
-				<div class="card-tools">
-				<form action="" method="POST">
-				  <div class="input-group input-group-sm" style="width: 150px;">
-				    <input type="text" name="search" class="form-control float-right" placeholder="Search specialis">
-
-				    <div class="input-group-append">
-				      <button type="submit" name="tampil" class="btn btn-default"><i class="fas fa-search"></i></button>
-				    </div>
-				  </div>
-				</form>
-				</div>
-			</div>
-			<div class="card-body table-responsive p-0" style="height: 450px;">
-				<table class="table table-head-fixed text-nowrap table-hover table-bordered font-10">
-					<thead>
-						<tr>
-							<th>No Rekam Medis</th>
-							<th>Hari Periksa</th>
-							<th>Waktu</th>
-							<th>Nama Pasien</th>
-							<th>Gol Darah</th>
-							<th>Tanggal Lahir</th>
-							<th>Umur</th>
-							<th>Agama</th>
-							<th>Tanggal Masuk</th>
-							<th>Action</th>
-						</tr>
-					</thead>
-					<tbody>
-					
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div> -->
-</div>
-
+</div>    
 <div class="modal fade" id="pasien" role="dialog">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
@@ -209,7 +107,7 @@ if($day['hari'] == "Senin"){
           	</thead>
           	<tbody>
           		<?php 
-          		$sqla = mysqli_query($koneksi, "SELECT * FROM tb_pasien X INNER JOIN tb_user Y ON y.id_user = x.id_user WHERE hari_periksa = 'Senin' GROUP BY nomor_antri DESC");
+          		$sqla = mysqli_query($koneksi, "SELECT * FROM tb_pasien X INNER JOIN tb_user Y ON y.id_user = x.id_user WHERE hari_periksa = 'Senin' GROUP BY nomor_antri ASC");
           		while ($dta = mysqli_fetch_array($sqla)) {
           				echo "<tr>
           				<td>".$dta['id_pasien']."</td>
@@ -242,7 +140,7 @@ if($day['hari'] == "Senin"){
           	</thead>
           	<tbody>
           		<?php 
-          		$sqla = mysqli_query($koneksi, "SELECT * FROM tb_pasien X INNER JOIN tb_user Y ON y.id_user = x.id_user WHERE hari_periksa = 'Selasa' GROUP BY nomor_antri DESC");
+          		$sqla = mysqli_query($koneksi, "SELECT * FROM tb_pasien X INNER JOIN tb_user Y ON y.id_user = x.id_user WHERE hari_periksa = 'Selasa' GROUP BY nomor_antri ASC");
           		while ($dta = mysqli_fetch_array($sqla)) {
           				echo "<tr>
           				<td>".$dta['id_pasien']."</td>
@@ -275,7 +173,7 @@ if($day['hari'] == "Senin"){
           	</thead>
           	<tbody>
           		<?php 
-          		$sqla = mysqli_query($koneksi, "SELECT * FROM tb_pasien X INNER JOIN tb_user Y ON y.id_user = x.id_user WHERE hari_periksa = 'Rabu' GROUP BY nomor_antri DESC");
+          		$sqla = mysqli_query($koneksi, "SELECT * FROM tb_pasien X INNER JOIN tb_user Y ON y.id_user = x.id_user WHERE hari_periksa = 'Rabu' GROUP BY nomor_antri ASC");
           		while ($dta = mysqli_fetch_array($sqla)) {
           				echo "<tr>
           				<td>".$dta['id_pasien']."</td>
@@ -308,7 +206,7 @@ if($day['hari'] == "Senin"){
           	</thead>
           	<tbody>
           		<?php 
-          		$sqla = mysqli_query($koneksi, "SELECT * FROM tb_pasien X INNER JOIN tb_user Y ON y.id_user = x.id_user WHERE hari_periksa = 'Kamis' GROUP BY nomor_antri DESC");
+          		$sqla = mysqli_query($koneksi, "SELECT * FROM tb_pasien X INNER JOIN tb_user Y ON y.id_user = x.id_user WHERE hari_periksa = 'Kamis' GROUP BY nomor_antri ASC");
           		while ($dta = mysqli_fetch_array($sqla)) {
           				echo "<tr>
           				<td>".$dta['id_pasien']."</td>
@@ -341,7 +239,7 @@ if($day['hari'] == "Senin"){
           	</thead>
           	<tbody>
           		<?php 
-          		$sqla = mysqli_query($koneksi, "SELECT * FROM tb_pasien X INNER JOIN tb_user Y ON y.id_user = x.id_user WHERE hari_periksa = 'Jumat' GROUP BY nomor_antri DESC");
+          		$sqla = mysqli_query($koneksi, "SELECT * FROM tb_pasien X INNER JOIN tb_user Y ON y.id_user = x.id_user WHERE hari_periksa = 'Jumat' GROUP BY nomor_antri ASC");
           		while ($dta = mysqli_fetch_array($sqla)) {
           				echo "<tr>
           				<td>".$dta['id_pasien']."</td>
@@ -374,7 +272,7 @@ if($day['hari'] == "Senin"){
           	</thead>
           	<tbody>
           		<?php 
-          		$sqla = mysqli_query($koneksi, "SELECT * FROM tb_pasien X INNER JOIN tb_user Y ON y.id_user = x.id_user WHERE hari_periksa = 'Sabtu' GROUP BY nomor_antri DESC");
+          		$sqla = mysqli_query($koneksi, "SELECT * FROM tb_pasien X INNER JOIN tb_user Y ON y.id_user = x.id_user WHERE hari_periksa = 'Sabtu' GROUP BY nomor_antri ASC");
           		while ($dta = mysqli_fetch_array($sqla)) {
           				echo "<tr>
           				<td>".$dta['id_pasien']."</td>
@@ -407,7 +305,7 @@ if($day['hari'] == "Senin"){
           	</thead>
           	<tbody>
           		<?php 
-          		$sqla = mysqli_query($koneksi, "SELECT * FROM tb_pasien X INNER JOIN tb_user Y ON y.id_user = x.id_user WHERE hari_periksa = 'Minggu' GROUP BY nomor_antri DESC");
+          		$sqla = mysqli_query($koneksi, "SELECT * FROM tb_pasien X INNER JOIN tb_user Y ON y.id_user = x.id_user WHERE hari_periksa = 'Minggu' GROUP BY nomor_antri ASC");
           		while ($dta = mysqli_fetch_array($sqla)) {
           				echo "<tr>
           				<td>".$dta['id_pasien']."</td>
@@ -416,7 +314,7 @@ if($day['hari'] == "Senin"){
           				<td>".$dta['no_rekam_medis']."</td>
           				<td>".$dta['hari_periksa']."</td>
           				<td>".$dta['waktu']."</td>"; ?>
-                              <td><a href="" class="btn bg-blue"><i class="fa fa-edit"></i></a></td>
+                              <td><a href="#antrian" data-toggle='modal' data-id="<?= $dta['id_user'] ?>" class="btn bg-blue"><i class="fa fa-edit"></i></a></td>
           				<?php echo "</tr>";
           		}
           		?>

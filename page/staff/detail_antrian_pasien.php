@@ -29,10 +29,6 @@ if ($_POST['rowid']) {
 			<label>Hari Periksa</label>
 			<input type="text" name="hari_periksa" class="form-control" value="<?= $data['hari_periksa']; ?>" readonly>
 		</div>
-		<div class="form-group">
-			<label>Waktu</label>
-			<input type="text" name="waktu" class="form-control" value="<?= $data['waktu']; ?>" readonly>
-		</div>
 	</div>
 	<div class="col-sm-4">
 		<div class="card row bg-gray">

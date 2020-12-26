@@ -116,14 +116,30 @@
         <?php 
         if (isset($_SESSION['id_user'])) { ?>
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <li class="nav-item">
-              <a href="?page=pendaftaran_pasienlama" class="nav-link text-white">
-                <i class="nav-icon fas fa-user"></i>
-                <p>
-                  Pendaftarann Pasien
-                </p>
-              </a>
-            </li>
+            
+            <?php 
+            $cekon = mysqli_query($koneksi, "SELECT * FROM tb_control");
+            $oncek = mysqli_fetch_array($cekon);
+            if ($oncek['status'] == 'On') { ?>
+              <li class="nav-item">
+                <a href="?page=pendaftaran_pasienlama" class="nav-link text-white">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>
+                    Pendaftarann Pasien
+                  </p>
+                </a>
+              </li>
+            <?php }else if($oncek['status'] == 'Off'){ ?>
+              <li class="nav-item">
+                <a href="?page=halaman_tutup" class="nav-link text-white">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>
+                    Pendaftarann telah Tutup
+                  </p>
+                </a>
+              </li>
+            <?php }
+            ?>
             <li class="nav-item">
               <a href="?page=antrian_pasien" class="nav-link text-white">
                 <i class="nav-icon fas fa-clipboard-list"></i>
@@ -204,7 +220,7 @@
                 <li class="breadcrumb-item"><a href="?page=pendaftaran">Pendaftaran</a></li>
               <?php }
               ?>
-              <li class="breadcrumb-item"><a href="?page=layanan">Layanan</a></li>
+              <!-- <li class="breadcrumb-item"><a href="?page=layanan">Layanan</a></li> -->
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -249,6 +265,9 @@
               break;
             case 'pendaftaran_pasienlama':
               include "page/pasien/pendaftaran_pasienlama.php";
+              break;
+            case 'halaman_tutup':
+              include "page/pasien/halaman_tutup.php";
               break;
             
             default:

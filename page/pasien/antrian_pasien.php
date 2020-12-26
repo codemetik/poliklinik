@@ -12,7 +12,7 @@
 	</div>
 	<div class="col-sm-4">
 		<div class="card">
-			<div class="card-header bg-gray">
+			<div class="card-header bg-green">
 				<h5 class="card-title"> Antrian Anda</h5>
 			</div>
 			<div class="card-body text-center">
@@ -27,7 +27,7 @@ IF(
 (SELECT MIN(nomor_antri) FROM tb_pasien WHERE nomor_antri != '') = nomor_antri, 
 'Sedang Proses Periksa ',IF(nomor_antri = '','Anda Sedang tidak dalam Antrian','Menunggu')
 ) AS status_periksa
-FROM tb_pasien WHERE id_user = '".$_SESSION['id_user']."' ORDER BY id_pasien");
+FROM tb_pasien WHERE id_user = '".$_SESSION['id_user']."' ORDER BY id_pasien ASC");
             	$cek = mysqli_fetch_array($minantri);
 				?>
 				<p>Berikut ID User Anda : <b><?= $_SESSION['id_user']; ?></b></p>

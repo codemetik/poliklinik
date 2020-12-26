@@ -28,7 +28,7 @@
       <!-- /.timeline-label -->
       <!-- timeline item -->
       <?php 
-      $sqlpasien = mysqli_query($koneksi, "SELECT * FROM tb_pasien X INNER JOIN tb_user Y ON y.id_user = x.id_user WHERE nomor_antri != '' ");
+      $sqlpasien = mysqli_query($koneksi, "SELECT * FROM tb_pasien X INNER JOIN tb_user Y ON y.id_user = x.id_user WHERE nomor_antri != '' ORDER BY nomor_antri ASC");
       while ($pasien = mysqli_fetch_array($sqlpasien)) { ?>
         <div>
             <i class="fas fa-user bg-gray"></i>

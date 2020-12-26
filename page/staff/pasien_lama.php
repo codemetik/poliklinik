@@ -93,7 +93,7 @@ if($day['hari'] == "Senin"){
         <div class="tab-content" id="vert-tabs-tabContent">
           <!-- Tab Senin -->
           <div class="tab-pane text-left fade <?= $showsenin; ?>" id="vert-tabs-senin" role="tabpanel" aria-labelledby="vert-tabs-senin-tab">
-          <table class="table table-responsive p-0 table-hover" style="height: 350px;">
+          <table class="table table-responsive p-0 table-hover" style="height: 350px; font-size: 14px;">
           	<thead class="bg-blue">
           		<tr>
           			<th>ID Pasien</th>
@@ -101,22 +101,35 @@ if($day['hari'] == "Senin"){
           			<th>Nomor Antri</th>
           			<th>No Rekam Medis</th>
           			<th>Hari Periksa</th>
-          			<th>Waktu</th>
-                         <th>Action</th>
+          			<th>Status</th>
+                <th>Action</th>
           		</tr>
           	</thead>
           	<tbody>
           		<?php 
           		$sqla = mysqli_query($koneksi, "SELECT * FROM tb_pasien X INNER JOIN tb_user Y ON y.id_user = x.id_user WHERE hari_periksa = 'Senin' GROUP BY nomor_antri ASC");
           		while ($dta = mysqli_fetch_array($sqla)) {
-          				echo "<tr>
+                $sqlstatus = mysqli_query($koneksi, "SELECT id_user, IF(nomor_antri = '','Tidak Ada',nomor_antri) AS nomer, 
+                IF(nomor_antri = '', 'Tidak Ada',
+                IF((SELECT MIN(nomor_antri) FROM tb_pasien WHERE nomor_antri != '') = nomor_antri, 'Sedang di Proses', 
+                CONCAT((SELECT COUNT(*) FROM tb_pasien WHERE nomor_antri != '') - 1,' Orang Lagi')
+                )) AS keterangan_periksa,
+                IF((SELECT MIN(nomor_antri) FROM tb_pasien WHERE nomor_antri != '') = nomor_antri, 
+                'Sedang Proses Periksa ',IF(nomor_antri = '','Anda Sedang tidak dalam Antrian','Menunggu')) AS status_periksa
+                FROM tb_pasien WHERE id_user = '".$dta['id_user']."' ORDER BY id_pasien");
+                $asd = mysqli_fetch_array($sqlstatus);
+                $snum = mysqli_num_rows($sqlstatus);
+                	echo "<tr>
           				<td>".$dta['id_pasien']."</td>
           				<td>".$dta['nama_user']."</td>
           				<td>".$dta['nomor_antri']."</td>
           				<td>".$dta['no_rekam_medis']."</td>
-          				<td>".$dta['hari_periksa']."</td>
-          				<td>".$dta['waktu']."</td>"; ?>
-                              <td><a href="#antrian" data-toggle='modal' data-id="<?= $dta['id_user'] ?>" class="btn bg-blue"><i class="fa fa-edit"></i></a></td>
+          				<td>".$dta['hari_periksa']."</td>"; 
+                  if ($asd['id_user'] == $dta['id_user']) {
+                    echo "<td>".$asd['status_periksa']."</td>";
+                  }
+                  ?>
+                  <td><a href="#antrian" data-toggle='modal' data-id="<?= $dta['id_user'] ?>" class="btn bg-blue"><i class="fa fa-edit"></i></a></td>
           				<?php echo "</tr>";
           		}
           		?>
@@ -126,7 +139,7 @@ if($day['hari'] == "Senin"){
           <!-- /Tab Senin -->
           <!-- Tab Selasa -->
           <div class="tab-pane fade <?= $showselasa; ?>" id="vert-tabs-selasa" role="tabpanel" aria-labelledby="vert-tabs-selasa-tab">
-          <table class="table table-responsive p-0 table-hover" style="height: 350px;">
+          <table class="table table-responsive p-0 table-hover" style="height: 350px; font-size: 14px;">
           	<thead class="bg-blue">
           		<tr>
           			<th>ID Pasien</th>
@@ -134,7 +147,7 @@ if($day['hari'] == "Senin"){
           			<th>Nomor Antri</th>
           			<th>No Rekam Medis</th>
           			<th>Hari Periksa</th>
-          			<th>Waktu</th>
+          			<th>Status</th>
                          <th>Action</th>
           		</tr>
           	</thead>
@@ -142,14 +155,27 @@ if($day['hari'] == "Senin"){
           		<?php 
           		$sqla = mysqli_query($koneksi, "SELECT * FROM tb_pasien X INNER JOIN tb_user Y ON y.id_user = x.id_user WHERE hari_periksa = 'Selasa' GROUP BY nomor_antri ASC");
           		while ($dta = mysqli_fetch_array($sqla)) {
+                  $sqlstatus = mysqli_query($koneksi, "SELECT id_user, IF(nomor_antri = '','Tidak Ada',nomor_antri) AS nomer, 
+                IF(nomor_antri = '', 'Tidak Ada',
+                IF((SELECT MIN(nomor_antri) FROM tb_pasien WHERE nomor_antri != '') = nomor_antri, 'Sedang di Proses', 
+                CONCAT((SELECT COUNT(*) FROM tb_pasien WHERE nomor_antri != '') - 1,' Orang Lagi')
+                )) AS keterangan_periksa,
+                IF((SELECT MIN(nomor_antri) FROM tb_pasien WHERE nomor_antri != '') = nomor_antri, 
+                'Sedang Proses Periksa ',IF(nomor_antri = '','Anda Sedang tidak dalam Antrian','Menunggu')) AS status_periksa
+                FROM tb_pasien WHERE id_user = '".$dta['id_user']."' ORDER BY id_pasien");
+                $asd = mysqli_fetch_array($sqlstatus);
+                $snum = mysqli_num_rows($sqlstatus);
           				echo "<tr>
           				<td>".$dta['id_pasien']."</td>
           				<td>".$dta['nama_user']."</td>
           				<td>".$dta['nomor_antri']."</td>
           				<td>".$dta['no_rekam_medis']."</td>
-          				<td>".$dta['hari_periksa']."</td>
-          				<td>".$dta['waktu']."</td>"; ?>
-          				<td><a href="" class="btn bg-blue"><i class="fa fa-edit"></i></a></td>
+          				<td>".$dta['hari_periksa']."</td>";
+                  if ($asd['id_user'] == $dta['id_user']) {
+                    echo "<td>".$asd['status_periksa']."</td>";
+                  }
+                  ?>
+          				<td><a href="#antrian" data-toggle='modal' data-id="<?= $dta['id_user'] ?>" class="btn bg-blue"><i class="fa fa-edit"></i></a></td>
                               <?php echo "</tr>";
           		}
           		?>
@@ -159,7 +185,7 @@ if($day['hari'] == "Senin"){
           <!-- /Tab Selasa -->
           <!-- Tab Rabu  -->
           <div class="tab-pane fade <?= $showrabu; ?>" id="vert-tabs-rabu" role="tabpanel" aria-labelledby="vert-tabs-rabu-tab">
-          <table class="table table-responsive p-0 table-hover" style="height: 350px;">
+          <table class="table table-responsive p-0 table-hover" style="height: 350px; font-size: 14px;">
           	<thead class="bg-blue">
           		<tr>
           			<th>ID Pasien</th>
@@ -167,7 +193,7 @@ if($day['hari'] == "Senin"){
           			<th>Nomor Antri</th>
           			<th>No Rekam Medis</th>
           			<th>Hari Periksa</th>
-          			<th>Waktu</th>
+          			<th>Status</th>
                          <th>Action</th>
           		</tr>
           	</thead>
@@ -175,14 +201,27 @@ if($day['hari'] == "Senin"){
           		<?php 
           		$sqla = mysqli_query($koneksi, "SELECT * FROM tb_pasien X INNER JOIN tb_user Y ON y.id_user = x.id_user WHERE hari_periksa = 'Rabu' GROUP BY nomor_antri ASC");
           		while ($dta = mysqli_fetch_array($sqla)) {
+                $sqlstatus = mysqli_query($koneksi, "SELECT id_user, IF(nomor_antri = '','Tidak Ada',nomor_antri) AS nomer, 
+                IF(nomor_antri = '', 'Tidak Ada',
+                IF((SELECT MIN(nomor_antri) FROM tb_pasien WHERE nomor_antri != '') = nomor_antri, 'Sedang di Proses', 
+                CONCAT((SELECT COUNT(*) FROM tb_pasien WHERE nomor_antri != '') - 1,' Orang Lagi')
+                )) AS keterangan_periksa,
+                IF((SELECT MIN(nomor_antri) FROM tb_pasien WHERE nomor_antri != '') = nomor_antri, 
+                'Sedang Proses Periksa ',IF(nomor_antri = '','Anda Sedang tidak dalam Antrian','Menunggu')) AS status_periksa
+                FROM tb_pasien WHERE id_user = '".$dta['id_user']."' ORDER BY id_pasien");
+                $asd = mysqli_fetch_array($sqlstatus);
+                $snum = mysqli_num_rows($sqlstatus);
           				echo "<tr>
           				<td>".$dta['id_pasien']."</td>
           				<td>".$dta['nama_user']."</td>
           				<td>".$dta['nomor_antri']."</td>
           				<td>".$dta['no_rekam_medis']."</td>
-          				<td>".$dta['hari_periksa']."</td>
-          				<td>".$dta['waktu']."</td>"; ?>
-                              <td><a href="" class="btn bg-blue"><i class="fa fa-edit"></i></a></td>
+          				<td>".$dta['hari_periksa']."</td>"; 
+                  if ($asd['id_user'] == $dta['id_user']) {
+                    echo "<td>".$asd['status_periksa']."</td>";
+                  }
+                  ?>
+                  <td><a href="#antrian" data-toggle='modal' data-id="<?= $dta['id_user'] ?>" class="btn bg-blue"><i class="fa fa-edit"></i></a></td>
           				<?php echo "</tr>";
           		}
           		?>
@@ -192,7 +231,7 @@ if($day['hari'] == "Senin"){
           <!-- /Tab Rabu  -->
           <!-- Tab Kamis -->
           <div class="tab-pane fade <?= $showkamis; ?>" id="vert-tabs-kamis" role="tabpanel" aria-labelledby="vert-tabs-kamis-tab">
-          <table class="table table-responsive p-0 table-hover" style="height: 350px;">
+          <table class="table table-responsive p-0 table-hover" style="height: 350px; font-size: 14px;">
           	<thead class="bg-blue">
           		<tr>
           			<th>ID Pasien</th>
@@ -200,7 +239,7 @@ if($day['hari'] == "Senin"){
           			<th>Nomor Antri</th>
           			<th>No Rekam Medis</th>
           			<th>Hari Periksa</th>
-          			<th>Waktu</th>
+          			<th>Status</th>
                          <th>Action</th>
           		</tr>
           	</thead>
@@ -208,14 +247,27 @@ if($day['hari'] == "Senin"){
           		<?php 
           		$sqla = mysqli_query($koneksi, "SELECT * FROM tb_pasien X INNER JOIN tb_user Y ON y.id_user = x.id_user WHERE hari_periksa = 'Kamis' GROUP BY nomor_antri ASC");
           		while ($dta = mysqli_fetch_array($sqla)) {
+                  $sqlstatus = mysqli_query($koneksi, "SELECT id_user, IF(nomor_antri = '','Tidak Ada',nomor_antri) AS nomer, 
+                IF(nomor_antri = '', 'Tidak Ada',
+                IF((SELECT MIN(nomor_antri) FROM tb_pasien WHERE nomor_antri != '') = nomor_antri, 'Sedang di Proses', 
+                CONCAT((SELECT COUNT(*) FROM tb_pasien WHERE nomor_antri != '') - 1,' Orang Lagi')
+                )) AS keterangan_periksa,
+                IF((SELECT MIN(nomor_antri) FROM tb_pasien WHERE nomor_antri != '') = nomor_antri, 
+                'Sedang Proses Periksa ',IF(nomor_antri = '','Anda Sedang tidak dalam Antrian','Menunggu')) AS status_periksa
+                FROM tb_pasien WHERE id_user = '".$dta['id_user']."' ORDER BY id_pasien");
+                $asd = mysqli_fetch_array($sqlstatus);
+                $snum = mysqli_num_rows($sqlstatus);
           				echo "<tr>
           				<td>".$dta['id_pasien']."</td>
           				<td>".$dta['nama_user']."</td>
           				<td>".$dta['nomor_antri']."</td>
           				<td>".$dta['no_rekam_medis']."</td>
-          				<td>".$dta['hari_periksa']."</td>
-          				<td>".$dta['waktu']."</td>"; ?>
-          				<td><a href="" data-toggle='modal' data-id="<?= $dta['id_user'] ?>" class="btn bg-blue"><i class="fa fa-edit"></i></a></td>
+          				<td>".$dta['hari_periksa']."</td>"; 
+                  if ($asd['id_user'] == $dta['id_user']) {
+                    echo "<td>".$asd['status_periksa']."</td>";
+                  }
+                  ?>
+          				<td><a href="#antrian" data-toggle='modal' data-id="<?= $dta['id_user'] ?>" class="btn bg-blue"><i class="fa fa-edit"></i></a></td>
                               <?php echo "</tr>";
           		}
           		?>
@@ -225,7 +277,7 @@ if($day['hari'] == "Senin"){
           <!-- /Tab Kamis -->
           <!-- Tab Jumat -->
           <div class="tab-pane fade <?= $showjumat; ?>" id="vert-tabs-jumat" role="tabpanel" aria-labelledby="vert-tabs-jumat-tab">
-          <table class="table table-responsive p-0 table-hover" style="height: 350px;">
+          <table class="table table-responsive p-0 table-hover" style="height: 350px; font-size: 14px;">
           	<thead class="bg-blue">
           		<tr>
           			<th>ID Pasien</th>
@@ -233,7 +285,7 @@ if($day['hari'] == "Senin"){
           			<th>Nomor Antri</th>
           			<th>No Rekam Medis</th>
           			<th>Hari Periksa</th>
-          			<th>Waktu</th>
+          			<th>Status</th>
                          <th>Action</th>
           		</tr>
           	</thead>
@@ -241,14 +293,27 @@ if($day['hari'] == "Senin"){
           		<?php 
           		$sqla = mysqli_query($koneksi, "SELECT * FROM tb_pasien X INNER JOIN tb_user Y ON y.id_user = x.id_user WHERE hari_periksa = 'Jumat' GROUP BY nomor_antri ASC");
           		while ($dta = mysqli_fetch_array($sqla)) {
+                  $sqlstatus = mysqli_query($koneksi, "SELECT id_user, IF(nomor_antri = '','Tidak Ada',nomor_antri) AS nomer, 
+                IF(nomor_antri = '', 'Tidak Ada',
+                IF((SELECT MIN(nomor_antri) FROM tb_pasien WHERE nomor_antri != '') = nomor_antri, 'Sedang di Proses', 
+                CONCAT((SELECT COUNT(*) FROM tb_pasien WHERE nomor_antri != '') - 1,' Orang Lagi')
+                )) AS keterangan_periksa,
+                IF((SELECT MIN(nomor_antri) FROM tb_pasien WHERE nomor_antri != '') = nomor_antri, 
+                'Sedang Proses Periksa ',IF(nomor_antri = '','Anda Sedang tidak dalam Antrian','Menunggu')) AS status_periksa
+                FROM tb_pasien WHERE id_user = '".$dta['id_user']."' ORDER BY id_pasien");
+                $asd = mysqli_fetch_array($sqlstatus);
+                $snum = mysqli_num_rows($sqlstatus);
           				echo "<tr>
           				<td>".$dta['id_pasien']."</td>
           				<td>".$dta['nama_user']."</td>
           				<td>".$dta['nomor_antri']."</td>
           				<td>".$dta['no_rekam_medis']."</td>
-          				<td>".$dta['hari_periksa']."</td>
-          				<td>".$dta['waktu']."</td>"; ?>
-                              <td><a href="" class="btn bg-blue"><i class="fa fa-edit"></i></a></td>
+          				<td>".$dta['hari_periksa']."</td>"; 
+                  if ($asd['id_user'] == $dta['id_user']) {
+                    echo "<td>".$asd['status_periksa']."</td>";
+                  }
+                  ?>
+                  <td><a href="#antrian" data-toggle='modal' data-id="<?= $dta['id_user'] ?>" class="btn bg-blue"><i class="fa fa-edit"></i></a></td>
           				<?php echo "</tr>";
           		}
           		?>
@@ -258,7 +323,7 @@ if($day['hari'] == "Senin"){
           <!-- /Tab Jumat -->
           <!-- Tab Sabtu -->
           <div class="tab-pane fade <?= $showsabtu; ?>" id="vert-tabs-sabtu" role="tabpanel" aria-labelledby="vert-tabs-sabtu-tab">
-          <table class="table table-responsive p-0 table-hover" style="height: 350px;">
+          <table class="table table-responsive p-0 table-hover" style="height: 350px; font-size: 14px;">
           	<thead class="bg-blue">
           		<tr>
           			<th>ID Pasien</th>
@@ -266,22 +331,35 @@ if($day['hari'] == "Senin"){
           			<th>Nomor Antri</th>
           			<th>No Rekam Medis</th>
           			<th>Hari Periksa</th>
-          			<th>Waktu</th>
-                         <th>Action</th>
+          			<th>Status</th>
+                <th>Action</th>
           		</tr>
           	</thead>
           	<tbody>
           		<?php 
           		$sqla = mysqli_query($koneksi, "SELECT * FROM tb_pasien X INNER JOIN tb_user Y ON y.id_user = x.id_user WHERE hari_periksa = 'Sabtu' GROUP BY nomor_antri ASC");
           		while ($dta = mysqli_fetch_array($sqla)) {
+                $sqlstatus = mysqli_query($koneksi, "SELECT id_user, IF(nomor_antri = '','Tidak Ada',nomor_antri) AS nomer, 
+                IF(nomor_antri = '', 'Tidak Ada',
+                IF((SELECT MIN(nomor_antri) FROM tb_pasien WHERE nomor_antri != '') = nomor_antri, 'Sedang di Proses', 
+                CONCAT((SELECT COUNT(*) FROM tb_pasien WHERE nomor_antri != '') - 1,' Orang Lagi')
+                )) AS keterangan_periksa,
+                IF((SELECT MIN(nomor_antri) FROM tb_pasien WHERE nomor_antri != '') = nomor_antri, 
+                'Sedang Proses Periksa ',IF(nomor_antri = '','Anda Sedang tidak dalam Antrian','Menunggu')) AS status_periksa
+                FROM tb_pasien WHERE id_user = '".$dta['id_user']."' ORDER BY id_pasien");
+                $asd = mysqli_fetch_array($sqlstatus);
+                $snum = mysqli_num_rows($sqlstatus);
           				echo "<tr>
           				<td>".$dta['id_pasien']."</td>
           				<td>".$dta['nama_user']."</td>
           				<td>".$dta['nomor_antri']."</td>
           				<td>".$dta['no_rekam_medis']."</td>
-          				<td>".$dta['hari_periksa']."</td>
-          				<td>".$dta['waktu']."</td>"; ?>
-                              <td><a href="" class="btn bg-blue"><i class="fa fa-edit"></i></a></td>
+          				<td>".$dta['hari_periksa']."</td>";
+                  if ($asd['id_user'] == $dta['id_user']) {
+                    echo "<td>".$asd['status_periksa']."</td>";
+                  }
+          				?>
+                  <td><a href="#antrian" data-toggle='modal' data-id="<?= $dta['id_user'] ?>" class="btn bg-blue"><i class="fa fa-edit"></i></a></td>
           				<?php echo "</tr>";
           		}
           		?>
@@ -291,7 +369,7 @@ if($day['hari'] == "Senin"){
           <!-- /Tab Sabtu -->
           <!-- Tab Minggu -->
           <div class="tab-pane fade <?= $showminggu; ?>" id="vert-tabs-minggu" role="tabpanel" aria-labelledby="vert-tabs-minggu-tab">
-          <table class="table table-responsive p-0 table-hover" style="height: 350px;">
+          <table class="table table-responsive p-0 table-hover" style="height: 350px; font-size: 14px;">
           	<thead class="bg-blue">
           		<tr>
           			<th>ID Pasien</th>
@@ -299,7 +377,7 @@ if($day['hari'] == "Senin"){
           			<th>Nomor Antri</th>
           			<th>No Rekam Medis</th>
           			<th>Hari Periksa</th>
-          			<th>Waktu</th>
+          			<th>Status</th>
                          <th>Action</th>
           		</tr>
           	</thead>
@@ -307,14 +385,27 @@ if($day['hari'] == "Senin"){
           		<?php 
           		$sqla = mysqli_query($koneksi, "SELECT * FROM tb_pasien X INNER JOIN tb_user Y ON y.id_user = x.id_user WHERE hari_periksa = 'Minggu' GROUP BY nomor_antri ASC");
           		while ($dta = mysqli_fetch_array($sqla)) {
-          				echo "<tr>
+          			$sqlstatus = mysqli_query($koneksi, "SELECT id_user, IF(nomor_antri = '','Tidak Ada',nomor_antri) AS nomer, 
+                IF(nomor_antri = '', 'Tidak Ada',
+                IF((SELECT MIN(nomor_antri) FROM tb_pasien WHERE nomor_antri != '') = nomor_antri, 'Sedang di Proses', 
+                CONCAT((SELECT COUNT(*) FROM tb_pasien WHERE nomor_antri != '') - 1,' Orang Lagi')
+                )) AS keterangan_periksa,
+                IF((SELECT MIN(nomor_antri) FROM tb_pasien WHERE nomor_antri != '') = nomor_antri, 
+                'Sedang Proses Periksa ',IF(nomor_antri = '','Anda Sedang tidak dalam Antrian','Menunggu')) AS status_periksa
+                FROM tb_pasien WHERE id_user = '".$dta['id_user']."' ORDER BY id_pasien");
+                $asd = mysqli_fetch_array($sqlstatus);
+                $snum = mysqli_num_rows($sqlstatus);
+                  echo "<tr>
           				<td>".$dta['id_pasien']."</td>
           				<td>".$dta['nama_user']."</td>
           				<td>".$dta['nomor_antri']."</td>
           				<td>".$dta['no_rekam_medis']."</td>
-          				<td>".$dta['hari_periksa']."</td>
-          				<td>".$dta['waktu']."</td>"; ?>
-                              <td><a href="#antrian" data-toggle='modal' data-id="<?= $dta['id_user'] ?>" class="btn bg-blue"><i class="fa fa-edit"></i></a></td>
+          				<td>".$dta['hari_periksa']."</td>"; 
+                  if ($asd['id_user'] == $dta['id_user']) {
+                    echo "<td>".$asd['status_periksa']."</td>";
+                  }
+                  ?>
+                  <td><a href="#antrian" data-toggle='modal' data-id="<?= $dta['id_user'] ?>" class="btn bg-blue"><i class="fa fa-edit"></i></a></td>
           				<?php echo "</tr>";
           		}
           		?>
@@ -331,9 +422,9 @@ if($day['hari'] == "Senin"){
 <div class="modal fade" id="antrian" role="dialog">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
-                <form action="page/staff/proses/proses_antrian_periksa.php" method="POST">
+                <form action="" method="POST">
                     <div class="modal-header bg-blue">
-                          <h4 class="modal-title">Input Jadwal Periksa</h4>
+                          <h4 class="modal-title">Detail Pasien</h4>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                           </button>
@@ -344,7 +435,7 @@ if($day['hari'] == "Senin"){
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <input type="submit" class="btn bg-blue" name="simpan" value="Save Changes">
+                        <!-- <input type="submit" class="btn bg-blue" name="simpan" value="Save Changes"> -->
                         <button class="btn bg-red" data-dismiss="modal">Cancel</button>
                     </div>        
                 </form>

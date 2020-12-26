@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 26 Des 2020 pada 07.24
+-- Waktu pembuatan: 26 Des 2020 pada 09.51
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.4.9
 
@@ -81,6 +81,24 @@ INSERT INTO `tb_bagian` (`id_bagian`, `nama_bagian`) VALUES
 ('BG002', 'Staff Pendaftaran'),
 ('BG003', 'Dokter'),
 ('BG004', 'Pasien');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_control`
+--
+
+CREATE TABLE `tb_control` (
+  `id` int(15) NOT NULL,
+  `status` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_control`
+--
+
+INSERT INTO `tb_control` (`id`, `status`) VALUES
+(1, 'On');
 
 -- --------------------------------------------------------
 
@@ -191,9 +209,10 @@ CREATE TABLE `tb_pasien` (
 --
 
 INSERT INTO `tb_pasien` (`id_pasien`, `id_dokter`, `id_user`, `no_antrian`, `no_rekam_medis`, `waktu`, `hari_periksa`, `nomor_antri`) VALUES
-('PSN0001', '10', 'USR0012', '', 'RM-20201220-0001', '', '', ''),
-('PSN0002', '11', 'USR0016', '', 'RM-20201220-0002', '', '', ''),
-('PSN0003', '10', 'USR0015', 'AN-20201226-0002', 'RM-20201221-0003', '', 'Sabtu', 'ANTRIAN002');
+('PSN0001', '11', 'USR0012', 'AN-20201226-0003', 'RM-20201220-0001', '', 'Sabtu', 'ANTRIAN003'),
+('PSN0002', '11', 'USR0016', 'AN-20201226-0004', 'RM-20201220-0002', '', 'Sabtu', 'ANTRIAN004'),
+('PSN0003', '10', 'USR0015', 'AN-20201226-0002', 'RM-20201221-0003', '', 'Sabtu', 'ANTRIAN002'),
+('PSN0004', '10', 'USR0017', 'AN-20201226-0004', 'RM-20201226-0004', '', 'Sabtu', 'ANTRIAN005');
 
 -- --------------------------------------------------------
 
@@ -215,7 +234,8 @@ CREATE TABLE `tb_pasien_baru` (
 INSERT INTO `tb_pasien_baru` (`no_antrian`, `hari`, `id_user`, `tgl_user_regis`) VALUES
 ('AN-20201220-0001', 'Minggu', 'USR0012', '2020-12-20 02:06:57'),
 ('AN-20201220-0002', 'Minggu', 'USR0015', '2020-12-20 09:52:56'),
-('AN-20201220-0003', 'Minggu', 'USR0016', '2020-12-20 10:21:26');
+('AN-20201220-0003', 'Minggu', 'USR0016', '2020-12-20 10:21:26'),
+('AN-20201226-0004', 'Sabtu', 'USR0017', '2020-12-26 03:46:30');
 
 -- --------------------------------------------------------
 
@@ -244,7 +264,8 @@ INSERT INTO `tb_rols_user` (`id_rols_user`, `id_user`, `id_bagian`, `tgl_user_re
 ('ROLS0013', 'USR0013', 'BG003', '2020-12-20 02:27:56'),
 ('ROLS0014', 'USR0014', 'BG003', '2020-12-20 09:49:00'),
 ('ROLS0015', 'USR0015', 'BG004', '2020-12-20 09:52:56'),
-('ROLS0016', 'USR0016', 'BG004', '2020-12-20 10:21:26');
+('ROLS0016', 'USR0016', 'BG004', '2020-12-20 10:21:26'),
+('ROLS0017', 'USR0017', 'BG004', '2020-12-26 03:46:30');
 
 -- --------------------------------------------------------
 
@@ -299,7 +320,8 @@ INSERT INTO `tb_user` (`id_user`, `username`, `password`, `confirm_password`, `n
 ('USR0013', 'mydokter', 'mydokter', 'mydokter', 'mydokter', 'Perempuan', 'B', 'Pamulang', '2020-01-02', 'Islam', '2020-12-20 02:27:56'),
 ('USR0014', 'mygigi', 'mygigi', 'mygigi', 'mygigi', 'Perempuan', 'Islam', 'Tangerang', '2020-05-01', 'Islam', '2020-12-20 09:49:00'),
 ('USR0015', 'pasien1', 'pasien1', 'pasien1', 'pasien1', 'Perempuan', 'B', 'Pamulang', '2020-03-06', 'Islam', '2020-12-20 09:52:56'),
-('USR0016', 'pasien2', 'pasien2', 'pasien2', 'pasien2', 'Perempuan', 'B', 'Jakarta', '2020-05-01', 'Islam', '2020-12-20 10:21:26');
+('USR0016', 'pasien2', 'pasien2', 'pasien2', 'pasien2', 'Perempuan', 'B', 'Jakarta', '2020-05-01', 'Islam', '2020-12-20 10:21:26'),
+('USR0017', 'Mila', 'mila', 'mila', 'mila', 'Perempuan', 'B', 'Depok', '1984-07-04', 'islam', '2020-12-26 03:46:30');
 
 -- --------------------------------------------------------
 
@@ -325,6 +347,12 @@ ALTER TABLE `posting_pendaftaran`
 --
 ALTER TABLE `tb_bagian`
   ADD PRIMARY KEY (`id_bagian`);
+
+--
+-- Indeks untuk tabel `tb_control`
+--
+ALTER TABLE `tb_control`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indeks untuk tabel `tb_dokter`
@@ -395,6 +423,12 @@ ALTER TABLE `tb_user`
 --
 ALTER TABLE `posting_pendaftaran`
   MODIFY `id_posting` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT untuk tabel `tb_control`
+--
+ALTER TABLE `tb_control`
+  MODIFY `id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_dokter`

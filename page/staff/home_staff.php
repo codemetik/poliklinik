@@ -25,7 +25,7 @@
       <!-- /.timeline-label -->
       <!-- timeline item -->
       <?php 
-      $sqlpasien = mysqli_query($koneksi, "SELECT * FROM tb_pasien X INNER JOIN tb_user Y ON y.id_user = x.id_user WHERE nomor_antri != '' ");
+      $sqlpasien = mysqli_query($koneksi, "SELECT * FROM tb_pasien X INNER JOIN tb_user Y ON y.id_user = x.id_user WHERE nomor_antri != '' ORDER BY nomor_antri ASC");
       while ($pasien = mysqli_fetch_array($sqlpasien)) { ?>
         <div>
             <i class="fas fa-user bg-gray"></i>
@@ -53,20 +53,73 @@
   <div class="col-sm-4">
     <div class="card mt-2">
       <div class="card-header bg-blue">
-        <h5>Control Antrian Hari ini jika penuh</h5>
+        <h5>Control Antrian Hari ini Jika Penuh</h5>
       </div>
       <div class="card-body">
-        
+        <div class="form-group">
+          <?php 
+          $sqlon = mysqli_query($koneksi, "SELECT * FROM tb_control");
+          $sqloff = mysqli_fetch_array($sqlon);
+
+            if ($sqloff['status'] == 'On') {
+              $isi = "Pendaftaran telah Buka";
+            }else{
+              $isi = 'Pendaftaran telah Tutup';
+            }
+            echo "<p>".$isi."</p>";
+          
+          ?>
+        </div>
+        <form action="" method="POST">
+          <div class="form-group">
+            <select class="form-control" name="onoff">
+              <?php 
+              $panel = array('On','Off');
+              // $sqlon = mysqli_query($koneksi, "SELECT * FROM tb_control");
+              // $sqloff = mysqli_fetch_array($sqlon);
+              foreach ($panel as $key) {
+                if ($key == $sqloff['status']) {
+                 $select = 'selected';
+                }else{
+                  $select = '';
+                }
+                echo "<option value='".$key."' ".$select.">".$key."</option>"; 
+              }
+              ?>
+            </select>
+          </div>
+          <div class="form-group text-center">
+            <button type="submit" class="btn bg-blue">Kirim</button>
+          </div>
+        </form>
       </div>
     </div>
-    <div class="card card-secondary">
-      <div class="card-header">
-        <h3 class="card-title">Bootstrap Switch</h3>
-      </div>
-      <div class="card-body">
-        <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch>
-        <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
-      </div>
-    </div>
+    
   </div>
 </div><!-- /.row -->
+
+<?php 
+if (isset($_POST['onoff'])) {
+  $kirim = $_POST['onoff'];
+
+  if ($kirim == 'On') {
+    $isi = "Pendaftaran telah di Buka";
+  }else{
+    $isi = 'Pendaftaran Telah di Tutup';
+  }
+
+  $up = mysqli_query($koneksi, "UPDATE tb_control SET status = '".$kirim."' WHERE id = '1'");
+  if ($up) {
+    echo "<script>
+    alert('".$isi."');
+    document.location.href = 'staff.php';
+    </script>";
+  }else{
+    echo "<script>
+    alert('Gagal');
+    document.location.href = 'staff.php';
+    </script>";
+  }
+}
+
+?>

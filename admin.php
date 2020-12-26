@@ -57,7 +57,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4 bg-primary">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link bg-dark">
+    <a href="admin.php?page=home_admin" class="brand-link bg-dark">
       <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text text-white">Klinik</span>
@@ -74,7 +74,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="admin.php" class="nav-link text-white">
+            <a href="admin.php?page=home_admin" class="nav-link text-white">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -129,6 +129,9 @@
         if (isset($_GET['page'])) {
           $page = $_GET['page'];
           switch ($page) {
+            case 'home_admin':
+              include "page/admin/home_admin.php";
+              break;
             case 'dokter':
               include "page/admin/users/dokter.php";
               break;
@@ -150,7 +153,7 @@
               break;
           }
         }else{
-          include "home.php";
+          include "page/admin/home_admin.php";
         }
         ?>
       </div><!--/. container-fluid -->

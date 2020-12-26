@@ -1,11 +1,11 @@
   <!-- Main Footer -->
-  <footer class="main-footer">
+  <!-- <footer class="main-footer">
     <strong>Copyright &copy; 2020-2021 <a href="#">Poliklinik</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 0.0.1
     </div>
-  </footer>
+  </footer> -->
 </div>
 <!-- ./wrapper -->
 
@@ -145,6 +145,8 @@
 
 <!-- date-range-picker -->
 <script src="plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Bootstrap Switch -->
+<script src="plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
 <script>
 $(function () {
     $('.select2').select2()
@@ -152,6 +154,10 @@ $(function () {
     $('.select2bs4').select2({
       theme: 'bootstrap4'
     })
+
+    $("input[data-bootstrap-switch]").each(function(){
+      $(this).bootstrapSwitch('state', $(this).prop('checked'));
+    });
 
 })
 </script>

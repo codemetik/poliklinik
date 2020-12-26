@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 20 Des 2020 pada 19.42
+-- Waktu pembuatan: 26 Des 2020 pada 07.24
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.4.9
 
@@ -191,9 +191,9 @@ CREATE TABLE `tb_pasien` (
 --
 
 INSERT INTO `tb_pasien` (`id_pasien`, `id_dokter`, `id_user`, `no_antrian`, `no_rekam_medis`, `waktu`, `hari_periksa`, `nomor_antri`) VALUES
-('PSN0001', '11', 'USR0012', 'AN-20201220-0001', 'RM-20201220-0001', '', 'Minggu', 'ANTRIAN001'),
-('PSN0002', '11', 'USR0016', 'AN-20201220-0003', 'RM-20201220-0002', '', 'Minggu', 'ANTRIAN002'),
-('PSN0003', '10', 'USR0015', 'AN-20201220-0002', 'RM-20201221-0003', '', 'Senin', 'ANTRIAN003');
+('PSN0001', '10', 'USR0012', '', 'RM-20201220-0001', '', '', ''),
+('PSN0002', '11', 'USR0016', '', 'RM-20201220-0002', '', '', ''),
+('PSN0003', '10', 'USR0015', 'AN-20201226-0002', 'RM-20201221-0003', '', 'Sabtu', 'ANTRIAN002');
 
 -- --------------------------------------------------------
 

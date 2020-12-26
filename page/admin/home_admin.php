@@ -1,15 +1,12 @@
 <div class="row">
-  <div class="col-sm-6">
-    <div class="card mt-2 m-5">
-    	<div class="card-header bg-blue">
-    		<h5>Pengumuman</h5>
-    	</div>
-    	<div class="card-body">
-    		<p class="text-justify">Praktek dokter umum dan gigi merupakan klinik yang memberikan pelayanan masyarakat dalam bidang kesehatan.</p>
-    	</div>
-    </div>
-  </div><!-- /.col -->
-  <div class="col-sm-6">
+  <div class="col-sm-12">
+    <ol class="breadcrumb mt-2">
+          <li class="breadcrumb-item active"><a href="#">Home</a></li>
+        </ol>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-8">
     <div class="card mt-2 m-0">
       <div class="card-header bg-blue">
         <h5>Antrian Pasien</h5>

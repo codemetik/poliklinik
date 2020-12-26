@@ -1,15 +1,12 @@
 <div class="row">
-  <div class="col-sm-6">
-    <div class="card mt-2 m-5">
-    	<div class="card-header bg-blue">
-    		<h5>Pengumuman</h5>
-    	</div>
-    	<div class="card-body">
-    		<p class="text-justify">Praktek dokter umum dan gigi merupakan klinik yang memberikan pelayanan masyarakat dalam bidang kesehatan.</p>
-    	</div>
-    </div>
-  </div><!-- /.col -->
-  <div class="col-sm-6">
+  <div class="col-sm-12">
+    <ol class="breadcrumb mt-2">
+          <li class="breadcrumb-item active"><a href="#">Home</a></li>
+        </ol>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-8">
     <div class="card mt-2 m-0">
       <div class="card-header bg-blue">
         <h5>Antrian Pasien</h5>
@@ -36,12 +33,11 @@
             <?php 
             $minantri = mysqli_query($koneksi, "SELECT MIN(nomor_antri) as antri FROM tb_pasien WHERE nomor_antri != ''");
             $cek = mysqli_fetch_array($minantri);
-            if ($pasien['nomor_antri'] == $cek['antri']) {
-              echo '<a href="" class="btn bg-green float-right"><i class="fas fa-clock"></i> Sedang Proses Periksa</a>';
-            }else{
+            if ($pasien['nomor_antri'] == $cek['antri']) { ?>
+              <a href="page/dokter/proses/delete_nomorantri.php?id='.$pasien['id_pasien'].'" class="btn bg-blue float-right" onclick="return confirm('Annda akan melanjutkan antrian!')"><i class="fas fa-clock"></i> Next</a>
+            <?php }else{
               echo '<span class="time"><i class="fas fa-clock"></i> Menunggu</span>';
             }
-
             ?>
             <h3 class="timeline-header no-border"><a href="#"><?= $pasien['nomor_antri']; ?></a> / <?= $pasien['nama_user']; ?></h3>
           </div>

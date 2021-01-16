@@ -121,13 +121,21 @@
             </ul>
             <hr>
             <li class="nav-item">
-            <a href="staff.php?page=posting_pendaftaran" class="nav-link text-white">
-              <i class="nav-icon fas fa-user-md"></i>
-              <p>
-                Pendaftaran
-              </p>
-            </a>
-          </li>
+              <a href="staff.php?page=posting_pendaftaran" class="nav-link text-white">
+                <i class="nav-icon fas fa-blog"></i>
+                <p>
+                  Pendaftaran
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="staff.php?page=laporan" class="nav-link text-white">
+                <i class="nav-icon fas fa-book"></i>
+                <p>
+                  Laporan
+                </p>
+              </a>
+            </li>
           </li>
         </ul>
       </nav>
@@ -170,6 +178,9 @@
               break;
             case 'posting_pendaftaran':
               include "page/staff/blog_pendaftaran.php";
+              break;
+            case 'laporan':
+              include "page/staff/laporan.php";
               break;
             
             default:

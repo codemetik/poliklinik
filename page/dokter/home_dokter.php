@@ -34,7 +34,7 @@
             $minantri = mysqli_query($koneksi, "SELECT MIN(nomor_antri) as antri FROM tb_pasien WHERE nomor_antri != ''");
             $cek = mysqli_fetch_array($minantri);
             if ($pasien['nomor_antri'] == $cek['antri']) { ?>
-              <a href="page/dokter/proses/delete_nomorantri.php?id='.$pasien['id_pasien'].'" class="btn bg-blue float-right" onclick="return confirm('Annda akan melanjutkan antrian!')"><i class="fas fa-clock"></i> Next</a>
+              <a href="page/dokter/proses/delete_nomorantri.php?id=<?= $pasien['id_pasien']; ?>" class="btn bg-blue float-right" onclick="return confirm('Annda akan melanjutkan antrian!')"><i class="fas fa-clock"></i> Next</a>
             <?php }else{
               echo '<span class="time"><i class="fas fa-clock"></i> Menunggu</span>';
             }

@@ -13,8 +13,12 @@
 	<div class="card-body">
 		<p class="text-left">Klinik dalam memberikan pelayanan menyediakan fasilitas dengan beberapa poliklinik. poliklinik yang ada pada klinik Dr. arvianti.</p>
 		<ul>
-			<li>Poliklinik Umum</li>
-			<li>Poliklinik Gigi</li>
+			<?php 
+			$sql = mysqli_query($koneksi, "SELECT * FROM tb_specialis");
+			while ($data = mysqli_fetch_array($sql)) {
+					echo "<li> Poliklinik ".$data['specialis']."</li>";
+			}
+			?>
 		</ul>
 	</div>
 </div>

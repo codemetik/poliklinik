@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 26 Des 2020 pada 09.51
+-- Waktu pembuatan: 16 Jan 2021 pada 07.56
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.4.9
 
@@ -98,7 +98,7 @@ CREATE TABLE `tb_control` (
 --
 
 INSERT INTO `tb_control` (`id`, `status`) VALUES
-(1, 'On');
+(1, 'Off');
 
 -- --------------------------------------------------------
 
@@ -190,6 +190,35 @@ INSERT INTO `tb_jenis_kelamin` (`id_jk`, `jenis_kelamin`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `tb_laporan`
+--
+
+CREATE TABLE `tb_laporan` (
+  `id_laporan` int(225) NOT NULL,
+  `id_user` char(15) NOT NULL,
+  `id_pasien` char(15) NOT NULL,
+  `id_dokter` char(15) NOT NULL,
+  `no_rekam_medis` varchar(50) NOT NULL,
+  `no_antrian` varchar(50) NOT NULL,
+  `hari_periksa_pasien` varchar(10) NOT NULL,
+  `tgl_periksa` varchar(225) NOT NULL,
+  `waktu_mulai_antri` varchar(20) NOT NULL,
+  `waktu_selesai_periksa` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_laporan`
+--
+
+INSERT INTO `tb_laporan` (`id_laporan`, `id_user`, `id_pasien`, `id_dokter`, `no_rekam_medis`, `no_antrian`, `hari_periksa_pasien`, `tgl_periksa`, `waktu_mulai_antri`, `waktu_selesai_periksa`) VALUES
+(5, 'USR0012', 'PSN0001', '10', 'RM-20201220-0001', 'AN-20210112-0001', 'Selasa', '2021-01-12', '11:03:59', '11:06:13'),
+(6, 'USR0015', 'PSN0003', '11', 'RM-20201221-0003', 'AN-20210112-0002', 'Selasa', '2021-01-12', '11:04:14', '11:10:30'),
+(7, 'USR0016', 'PSN0002', '10', 'RM-20201220-0002', 'AN-20210112-0003', 'Selasa', '2021-01-12', '11:04:34', '11:09:02'),
+(8, 'USR0017', 'PSN0004', '11', 'RM-20201226-0004', 'AN-20210112-0004', 'Selasa', '2021-01-12', '11:04:56', '11:10:18');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `tb_pasien`
 --
 
@@ -209,10 +238,10 @@ CREATE TABLE `tb_pasien` (
 --
 
 INSERT INTO `tb_pasien` (`id_pasien`, `id_dokter`, `id_user`, `no_antrian`, `no_rekam_medis`, `waktu`, `hari_periksa`, `nomor_antri`) VALUES
-('PSN0001', '11', 'USR0012', 'AN-20201226-0003', 'RM-20201220-0001', '', 'Sabtu', 'ANTRIAN003'),
-('PSN0002', '11', 'USR0016', 'AN-20201226-0004', 'RM-20201220-0002', '', 'Sabtu', 'ANTRIAN004'),
-('PSN0003', '10', 'USR0015', 'AN-20201226-0002', 'RM-20201221-0003', '', 'Sabtu', 'ANTRIAN002'),
-('PSN0004', '10', 'USR0017', 'AN-20201226-0004', 'RM-20201226-0004', '', 'Sabtu', 'ANTRIAN005');
+('PSN0001', '10', 'USR0012', '', 'RM-20201220-0001', '', '', ''),
+('PSN0002', '10', 'USR0016', '', 'RM-20201220-0002', '', '', ''),
+('PSN0003', '10', 'USR0015', '', 'RM-20201221-0003', '', '', ''),
+('PSN0004', '11', 'USR0017', '', 'RM-20201226-0004', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -381,6 +410,12 @@ ALTER TABLE `tb_jenis_kelamin`
   ADD PRIMARY KEY (`id_jk`);
 
 --
+-- Indeks untuk tabel `tb_laporan`
+--
+ALTER TABLE `tb_laporan`
+  ADD PRIMARY KEY (`id_laporan`);
+
+--
 -- Indeks untuk tabel `tb_pasien`
 --
 ALTER TABLE `tb_pasien`
@@ -453,6 +488,12 @@ ALTER TABLE `tb_jadwal_praktek`
 --
 ALTER TABLE `tb_jenis_kelamin`
   MODIFY `id_jk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT untuk tabel `tb_laporan`
+--
+ALTER TABLE `tb_laporan`
+  MODIFY `id_laporan` int(225) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

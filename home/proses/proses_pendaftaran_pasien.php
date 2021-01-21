@@ -38,22 +38,33 @@ if (isset($_POST['simpan'])) {
 	$an = "AN-".$date."-";
 	$no_antrian = $an . sprintf("%04s", $nOn);
 
-	$sql = mysqli_query($koneksi, "INSERT INTO tb_user(id_user, username, password, confirm_password, nama_user, jenis_kelamin, gol_darah, tempat_lahir, tanggal_lahir, agama, tgl_masuk) VALUES('$id_user','$username','$password','$confirm_password','$nama_user','$jenis_kelamin','$gol_darah','$tempat_lahir','$tanggal_lahir','$agama','$tgl_masuk')");
+	if ($password == $confirm_password) {
+		
+		$sql = mysqli_query($koneksi, "INSERT INTO tb_user(id_user, username, password, confirm_password, nama_user, jenis_kelamin, gol_darah, tempat_lahir, tanggal_lahir, agama, tgl_masuk) VALUES('$id_user','$username','$password','$confirm_password','$nama_user','$jenis_kelamin','$gol_darah','$tempat_lahir','$tanggal_lahir','$agama','$tgl_masuk')");
 
-	$sql1 = mysqli_query($koneksi, "INSERT INTO tb_rols_user(id_rols_user, id_user, id_bagian, tgl_user_regis)VALUES('$id_rols_user','$id_user','$id_bagian','$tgl_masuk')");
-	
-	$pasien_baru = mysqli_query($koneksi, "INSERT INTO tb_pasien_baru(no_antrian, hari, id_user, tgl_user_regis) VALUES('$no_antrian','$hari','$id_user','$tgl_masuk')");
+		$sql1 = mysqli_query($koneksi, "INSERT INTO tb_rols_user(id_rols_user, id_user, id_bagian, tgl_user_regis)VALUES('$id_rols_user','$id_user','$id_bagian','$tgl_masuk')");
+		
+		$pasien_baru = mysqli_query($koneksi, "INSERT INTO tb_pasien_baru(no_antrian, hari, id_user, tgl_user_regis) VALUES('$no_antrian','$hari','$id_user','$tgl_masuk')");
 
-	if ($sql && $sql1 && $pasien_baru) {
-		echo "<script>
-		alert('Data Berhasil disimpan');
-		document.location.href = '../../?page=pendaftaran';
-		</script>";
+		if ($sql && $sql1 && $pasien_baru) {
+			echo "<script>
+			alert('Data Berhasil disimpan');
+			document.location.href = '../../index.php';
+			</script>";
+		}else{
+			echo "<script>
+			alert('Data Gagal disimpan');
+			document.location.href = '../../?page=register';
+			</script>";
+		}
+
 	}else{
+
 		echo "<script>
-		alert('Data Berhasil disimpan');
-		document.location.href = '../../?page=pendaftaran';
-		</script>";
+			alert('Password dan confirm password tidak sama');
+			document.location.href = '../../?page=register';
+			</script>";
+
 	}
 
 }

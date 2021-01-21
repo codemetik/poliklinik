@@ -1,3 +1,7 @@
+<?php 
+$sql = mysqli_query($koneksi, "SELECT * FROM tb_pasien WHERE id_user = '".$_SESSION['id_user']."'");
+$row = mysqli_num_rows($sql);
+?>
 <div class="row mt-2">
 	<div class="col-sm-12">
 		<ol class="breadcrumb">
@@ -8,8 +12,12 @@
 </div>
 <div class="row">
 	<div class="col-sm-4">
-		
+	
 	</div>
+	<?php 
+	//jika id_user ada di table tb_pasien
+	if ($row > 0) { ?>
+	
 	<div class="col-sm-4">
 		<div class="card">
 			<div class="card-header bg-green">
@@ -43,6 +51,23 @@ FROM tb_pasien WHERE id_user = '".$_SESSION['id_user']."' ORDER BY id_pasien ASC
 			<h5><a href="page/pasien/proses/download_antrian.php" target="_blank"><i class="fa fa-download"></i> Download</a></h5>
 		</div>
 	</div>
+
+	<?php }else{ ?>
+		
+		<div class="col-sm-4">
+		<div class="card">
+			<div class="card-header bg-green">
+				<h5 class="card-title">Pendaftarn Antrian</h5>
+			</div>
+			<div class="card-body text-center">
+				<p>Mohon Maaf</p>
+				<h2>Anda belum melakukan pendaftaran antrian</h2>
+			</div>
+		</div>
+	</div>
+
+	<?php } //tutup.
+	?>
 	<div class="col-sm-4">
 		
 	</div>

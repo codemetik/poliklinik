@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 16 Jan 2021 pada 07.56
+-- Waktu pembuatan: 21 Jan 2021 pada 15.29
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.4.9
 
@@ -98,7 +98,7 @@ CREATE TABLE `tb_control` (
 --
 
 INSERT INTO `tb_control` (`id`, `status`) VALUES
-(1, 'Off');
+(1, 'On');
 
 -- --------------------------------------------------------
 
@@ -214,7 +214,10 @@ INSERT INTO `tb_laporan` (`id_laporan`, `id_user`, `id_pasien`, `id_dokter`, `no
 (5, 'USR0012', 'PSN0001', '10', 'RM-20201220-0001', 'AN-20210112-0001', 'Selasa', '2021-01-12', '11:03:59', '11:06:13'),
 (6, 'USR0015', 'PSN0003', '11', 'RM-20201221-0003', 'AN-20210112-0002', 'Selasa', '2021-01-12', '11:04:14', '11:10:30'),
 (7, 'USR0016', 'PSN0002', '10', 'RM-20201220-0002', 'AN-20210112-0003', 'Selasa', '2021-01-12', '11:04:34', '11:09:02'),
-(8, 'USR0017', 'PSN0004', '11', 'RM-20201226-0004', 'AN-20210112-0004', 'Selasa', '2021-01-12', '11:04:56', '11:10:18');
+(8, 'USR0017', 'PSN0004', '11', 'RM-20201226-0004', 'AN-20210112-0004', 'Selasa', '2021-01-12', '11:04:56', '11:10:18'),
+(10, 'USR0018', 'PSN0005', '10', 'RM-20210121-0005', 'AN-20210121-0005', 'Kamis', '2021-01-21', '09:06:42', '09:08:40'),
+(11, 'USR0018', 'PSN0005', '11', 'RM-20210121-0005', 'AN-20210121-0001', 'Kamis', '2021-01-21', '09:21:01', ''),
+(12, 'USR0019', 'PSN0006', '10', 'RM-20210121-0006', 'AN-20210121-0006', 'Kamis', '2021-01-21', '09:21:35', '');
 
 -- --------------------------------------------------------
 
@@ -241,7 +244,9 @@ INSERT INTO `tb_pasien` (`id_pasien`, `id_dokter`, `id_user`, `no_antrian`, `no_
 ('PSN0001', '10', 'USR0012', '', 'RM-20201220-0001', '', '', ''),
 ('PSN0002', '10', 'USR0016', '', 'RM-20201220-0002', '', '', ''),
 ('PSN0003', '10', 'USR0015', '', 'RM-20201221-0003', '', '', ''),
-('PSN0004', '11', 'USR0017', '', 'RM-20201226-0004', '', '', '');
+('PSN0004', '11', 'USR0017', '', 'RM-20201226-0004', '', '', ''),
+('PSN0005', '11', 'USR0018', 'AN-20210121-0001', 'RM-20210121-0005', '', 'Kamis', 'ANTRIAN001'),
+('PSN0006', '10', 'USR0019', 'AN-20210121-0006', 'RM-20210121-0006', '', 'Kamis', 'ANTRIAN002');
 
 -- --------------------------------------------------------
 
@@ -264,7 +269,9 @@ INSERT INTO `tb_pasien_baru` (`no_antrian`, `hari`, `id_user`, `tgl_user_regis`)
 ('AN-20201220-0001', 'Minggu', 'USR0012', '2020-12-20 02:06:57'),
 ('AN-20201220-0002', 'Minggu', 'USR0015', '2020-12-20 09:52:56'),
 ('AN-20201220-0003', 'Minggu', 'USR0016', '2020-12-20 10:21:26'),
-('AN-20201226-0004', 'Sabtu', 'USR0017', '2020-12-26 03:46:30');
+('AN-20201226-0004', 'Sabtu', 'USR0017', '2020-12-26 03:46:30'),
+('AN-20210121-0005', 'Kamis', 'USR0018', '2021-01-21 08:58:23'),
+('AN-20210121-0006', 'Kamis', 'USR0019', '2021-01-21 09:09:15');
 
 -- --------------------------------------------------------
 
@@ -294,7 +301,9 @@ INSERT INTO `tb_rols_user` (`id_rols_user`, `id_user`, `id_bagian`, `tgl_user_re
 ('ROLS0014', 'USR0014', 'BG003', '2020-12-20 09:49:00'),
 ('ROLS0015', 'USR0015', 'BG004', '2020-12-20 09:52:56'),
 ('ROLS0016', 'USR0016', 'BG004', '2020-12-20 10:21:26'),
-('ROLS0017', 'USR0017', 'BG004', '2020-12-26 03:46:30');
+('ROLS0017', 'USR0017', 'BG004', '2020-12-26 03:46:30'),
+('ROLS0018', 'USR0018', 'BG004', '2021-01-21 08:58:23'),
+('ROLS0019', 'USR0019', 'BG004', '2021-01-21 09:09:15');
 
 -- --------------------------------------------------------
 
@@ -350,7 +359,9 @@ INSERT INTO `tb_user` (`id_user`, `username`, `password`, `confirm_password`, `n
 ('USR0014', 'mygigi', 'mygigi', 'mygigi', 'mygigi', 'Perempuan', 'Islam', 'Tangerang', '2020-05-01', 'Islam', '2020-12-20 09:49:00'),
 ('USR0015', 'pasien1', 'pasien1', 'pasien1', 'pasien1', 'Perempuan', 'B', 'Pamulang', '2020-03-06', 'Islam', '2020-12-20 09:52:56'),
 ('USR0016', 'pasien2', 'pasien2', 'pasien2', 'pasien2', 'Perempuan', 'B', 'Jakarta', '2020-05-01', 'Islam', '2020-12-20 10:21:26'),
-('USR0017', 'Mila', 'mila', 'mila', 'mila', 'Perempuan', 'B', 'Depok', '1984-07-04', 'islam', '2020-12-26 03:46:30');
+('USR0017', 'Mila', 'mila', 'mila', 'mila', 'Perempuan', 'B', 'Depok', '1984-07-04', 'islam', '2020-12-26 03:46:30'),
+('USR0018', 'aku', 'aku', 'aku', 'Akukamu', 'Laki-laki', 'B', 'Bekasi', '2021-01-21', 'Islam', '2021-01-21 08:58:23'),
+('USR0019', 'dia', 'dia', 'dia', 'aku dan dia', 'Perempuan', 'A', 'Jakarta', '2021-01-21', 'Kristen', '2021-01-21 09:09:15');
 
 -- --------------------------------------------------------
 
@@ -493,7 +504,7 @@ ALTER TABLE `tb_jenis_kelamin`
 -- AUTO_INCREMENT untuk tabel `tb_laporan`
 --
 ALTER TABLE `tb_laporan`
-  MODIFY `id_laporan` int(225) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_laporan` int(225) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

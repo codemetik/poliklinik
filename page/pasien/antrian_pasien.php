@@ -1,6 +1,7 @@
 <?php 
 $sql = mysqli_query($koneksi, "SELECT * FROM tb_pasien WHERE id_user = '".$_SESSION['id_user']."'");
 $row = mysqli_num_rows($sql);
+$sel = mysqli_fetch_array($sql);
 ?>
 <div class="row mt-2">
 	<div class="col-sm-12">
@@ -28,9 +29,9 @@ $row = mysqli_num_rows($sql);
 				$minantri = mysqli_query($koneksi, "SELECT id_user, IF(nomor_antri = '','Tidak Ada',nomor_antri) AS nomer, 
 IF(nomor_antri = '', 'Tidak Ada',
 IF((SELECT MIN(nomor_antri) FROM tb_pasien WHERE nomor_antri != '') = nomor_antri, 'Sedang di Proses', 
-CONCAT((SELECT COUNT(*) FROM tb_pasien WHERE nomor_antri != '') - 1,' Orang Lagi')
+CONCAT((SELECT COUNT(*) FROM tb_pasien WHERE nomor_antri != '' AND nomor_antri <= '".$sel['nomor_antri']."') - 1,' Orang Lagi')
 )
-) AS keterangan_periksa,
+) AS keterangan_periksa, IF((SELECT MIN(nomor_antri) FROM tb_pasien WHERE nomor_antri != '') = nomor_antri, waktu, ADDTIME(waktu, '00:03:00')) AS waktu_datang,
 IF(
 (SELECT MIN(nomor_antri) FROM tb_pasien WHERE nomor_antri != '') = nomor_antri, 
 'Sedang Proses Periksa ',IF(nomor_antri = '','Anda Sedang tidak dalam Antrian','Menunggu')
@@ -45,6 +46,7 @@ FROM tb_pasien WHERE id_user = '".$_SESSION['id_user']."' ORDER BY id_pasien ASC
 				<b><h2><?= $cek['status_periksa']; ?></h2></b>
 				<p class="mb-0">Keterangan :</p>
 				<b><h2><?= $cek['keterangan_periksa']; ?></h2></b>
+				<p class="mb-0">Silahkan Datang Pukul : <?= $cek['waktu_datang']; ?></p>
 			</div>
 		</div>
 		<div class="card card-body text-center">
